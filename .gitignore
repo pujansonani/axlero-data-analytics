@@ -58,3 +58,4 @@ models/*
 *.temp
 logs/
 tmp/
+!data/processed/final_validated_dataset.csv
