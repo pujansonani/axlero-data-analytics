@@ -11,7 +11,7 @@ from typing import Any, Dict, Tuple
 
 import numpy as np
 import pandas as pd
-from sklearn.impute import KNNImputer, SimpleImputer
+from sklearn.impute import KNNImputer
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error
 from sklearn.preprocessing import StandardScaler
 
@@ -196,15 +196,20 @@ class CreditRiskImputer:
 
     def fit(self, df_train: pd.DataFrame) -> "CreditRiskImputer":
         """Fit imputation parameters strictly on the training set."""
+        clean_train = df_train.copy()
+        clean_train["person_age"] = clean_train["person_age"].astype(float)
+        clean_train.loc[clean_train["person_age"] > 100, "person_age"] = np.nan
+        clean_train.loc[clean_train["person_emp_length"] > 60, "person_emp_length"] = np.nan
+
         self.grade_int_medians_ = (
-            df_train.groupby("loan_grade")["loan_int_rate"].median().to_dict()
+            clean_train.groupby("loan_grade")["loan_int_rate"].median().to_dict()
         )
-        self.global_int_median_ = float(df_train["loan_int_rate"].median())
-        self.emp_median_ = float(df_train["person_emp_length"].median())
-        self.age_median_ = float(df_train["person_age"].median())
+        self.global_int_median_ = float(clean_train["loan_int_rate"].median())
+        self.emp_median_ = float(clean_train["person_emp_length"].median())
+        self.age_median_ = float(clean_train["person_age"].median())
 
         if self.strategy == "knn":
-            work = df_train.copy()
+            work = clean_train.copy()
             work["grade_num"] = work["loan_grade"].map(GRADE_MAP).fillna(3).astype(float)
             # Fit scaler on observed medians first for stable scaling, then KNNImputer on scaled space
             temp_filled = work[self.knn_cols_].copy()

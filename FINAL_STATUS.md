@@ -16,12 +16,12 @@
 | **3. Statistical Analysis & WoE/IV** *(Implemented from scratch for Module 3)* | **COMPLETED** | `src/features/statistical_tests.py`, `src/features/woe_iv.py`, `notebooks/04_statistical_analysis.ipynb`, `notebooks/05_woe_iv_analysis.ipynb`, `reports/statistical_analysis.md`, `reports/figures/fig10_woe_iv_summary.png`, `reports/figures/fig11_woe_curves.png`. |
 | **4. Feature Engineering & Selection** *(Implemented from scratch for Module 4)* | **COMPLETED** | `src/features/feature_engineering.py` (`CreditRiskFeatureEngineer`, 14 domain features, train-only outlier caps & scaling, VIF multicollinearity audit, composite feature ranking), `notebooks/06_feature_engineering.ipynb`. |
 | **5. Machine Learning, Tuning & Explainability** *(Implemented from scratch for Module 5)* | **COMPLETED** | `src/models/train_model.py`, `src/evaluation/evaluate_model.py`, `notebooks/07_model_training.ipynb`, `notebooks/08_model_evaluation.ipynb`, `reports/model_evaluation_report.md`, `reports/figures/fig12`–`fig16`, `models/credit_risk_pipeline.joblib`, `models/best_model.joblib`. |
-| **6. Integration, Testing & Streamlit App** *(Pujan Sonani — Team Lead)* | **COMPLETED** | `src/run_pipeline.py`, `app/streamlit_app.py` (8 interactive pages), `tests/` (`10 / 10` unit tests passing), `config/config.yaml`, `README.md`, `reports/final_project_report.md`, `docs/*.md`. |
+| **6. Integration, Testing & Streamlit App** *(Pujan Sonani — Team Lead)* | **COMPLETED** | `src/run_pipeline.py`, `app/streamlit_app.py` (8 interactive pages), `tests/` (`13 / 13` unit & integration tests passing), `config/config.yaml`, `README.md`, `reports/final_project_report.md`, `reports/final_qa_report.md`, `docs/*.md`. |
 
 ---
 
 ## 2. Pending Modules
-- **None.** All 6 team modules, 9 notebooks, 16 figures, 6 reports, 5 documentation guides, serialized models, automated tests, and the 8-page Streamlit application are complete and verified.
+- **None.** All 6 team modules, 9 notebooks, 16 figures, 7 reports (including `reports/final_qa_report.md`), 5 documentation guides, serialized models, 13 automated tests, and the 8-page Streamlit application are complete and independently verified.
 
 ---
 
@@ -39,9 +39,11 @@
 4. **Nested Duplicate Directory in Member 2's Branch (`origin/Sriram`):**
    - *Issue:* `origin/Sriram` uploaded files inside `member2_analysis_visualization/member2_analysis_visualization/` along with a duplicate copy of `final_validated_dataset.csv`.
    - *Fix:* Integrated figures cleanly into `reports/figures/`, plotting code into `src/visualization/eda_plots.py`, and analysis into `notebooks/03_exploratory_data_analysis.ipynb` and `reports/eda_report.md`.
-5. **Prevention of Imputation, WoE, and Scaling Data Leakage:**
-   - *Issue:* Imputing or scaling on the full dataset prior to train/test splitting leaks test distribution statistics into training.
-   - *Fix:* Partitioned `data/interim/cleaned_credit_risk.csv` via stratified `70/15/15` split *before* fitting `CreditRiskImputer`, `WoEIVAnalyzer`, and `CreditRiskFeatureEngineer` strictly on `df_train`.
+5. **Prevention of Imputation, WoE, Scaling, and Model Selection Data Leakage:**
+   - *Issue:* Imputing or scaling on the full dataset prior to train/test splitting leaks test distribution statistics into training; sorting models by `test_roc_auc` selects the champion on the held-out test set.
+   - *Fix:* Partitioned `data/interim/cleaned_credit_risk.csv` via stratified `70/15/15` split *before* fitting `CreditRiskImputer`, `WoEIVAnalyzer`, and `CreditRiskFeatureEngineer` strictly on `df_train`. Updated `evaluate_all_models()` to sort strictly by `["val_roc_auc", "cv_roc_auc_mean"]` so the held-out test set (`n = 4,863`) is used exclusively for unbiased final reporting.
+6. **Phase-2 Code Quality, Dynamic Dashboard & Cross-Working-Directory Fixes:**
+   - *Fix:* Removed 12 unused imports across 10 files; added `GradientBoostingClassifier` CV tuning grid in `src/models/train_model.py`; added explicit invalidation (`person_age > 100 -> NaN`, `person_emp_length > 60 -> NaN`) inside `CreditRiskImputer.fit()`; replaced all hardcoded summary strings in `app/streamlit_app.py` with dynamic JSON/DataFrame calculations and non-interactive `Agg` Matplotlib backend; and ensured all 9 notebooks execute cleanly from both the repository root and `notebooks/`.
 
 ---
 

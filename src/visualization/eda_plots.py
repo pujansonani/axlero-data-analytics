@@ -142,7 +142,7 @@ def generate_eda_figures(df_raw_val: pd.DataFrame, out_dir: Path) -> Dict[str, A
             f"{v:,}  ({v / len(df) * 100:.1f}%)",
             va="center",
             color=INK,
-            fontweight="medium",
+            fontweight="normal",
         )
     ax.set_xlim(0, counts.max() * 1.26)
     ax.set_xlabel("Number of loans (n = 32,416)")

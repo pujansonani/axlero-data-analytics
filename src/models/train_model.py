@@ -1,8 +1,7 @@
 """Model training, cross-validated hyperparameter tuning, and prediction bundle serialization (Module 5 - Sowmya)."""
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
-import joblib
 import numpy as np
 import pandas as pd
 import shap
@@ -146,7 +145,29 @@ def tune_hyperparameters_cv(
         "best_cv_roc_auc": round(float(rf_search.best_score_), 4),
     }
 
-    # 4. XGBoost tuning
+    # 4. Gradient Boosting tuning
+    gb_search = RandomizedSearchCV(
+        GradientBoostingClassifier(random_state=random_state),
+        param_distributions={
+            "n_estimators": [150, 250],
+            "learning_rate": [0.05, 0.08, 0.1],
+            "max_depth": [4, 5],
+            "min_samples_leaf": [10, 15, 25],
+            "subsample": [0.85, 1.0],
+        },
+        n_iter=6,
+        scoring="roc_auc",
+        cv=skf,
+        random_state=random_state,
+        n_jobs=-1,
+    )
+    gb_search.fit(X_train, y_train)
+    tuning_results["Gradient Boosting"] = {
+        "best_params": gb_search.best_params_,
+        "best_cv_roc_auc": round(float(gb_search.best_score_), 4),
+    }
+
+    # 5. XGBoost tuning
     xgb_search = RandomizedSearchCV(
         XGBClassifier(eval_metric="logloss", random_state=random_state, n_jobs=-1),
         param_distributions={

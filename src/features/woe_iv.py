@@ -15,7 +15,7 @@ Note on sign convention:
   the exact same Information Value (IV) because (Dist_Event - Dist_NonEvent) * ln(Dist_Event / Dist_NonEvent) >= 0.
 """
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -63,7 +63,6 @@ class WoEIVAnalyzer:
 
         for col in self.numeric_cols_:
             s = df_train[col]
-            _, edges = pd.qcut(s.rank(method="first"), q=self.num_bins, retbins=True)
             # Derive actual value quantile edges cleanly
             quantiles = np.linspace(0.0, 1.0, self.num_bins + 1)
             raw_edges = np.unique(np.nanquantile(s, quantiles))

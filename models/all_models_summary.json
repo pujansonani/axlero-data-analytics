@@ -761,6 +761,16 @@
       },
       "best_cv_roc_auc": 0.9255
     },
+    "Gradient Boosting": {
+      "best_params": {
+        "subsample": 0.85,
+        "n_estimators": 250,
+        "min_samples_leaf": 10,
+        "max_depth": 5,
+        "learning_rate": 0.1
+      },
+      "best_cv_roc_auc": 0.9439
+    },
     "XGBoost": {
       "best_params": {
         "subsample": 0.85,
@@ -794,7 +804,9 @@
       "test_tn": 3779,
       "test_fp": 20,
       "test_fn": 253,
-      "test_tp": 811
+      "test_tp": 811,
+      "test_macro_avg_f1": 0.9105,
+      "test_weighted_avg_f1": 0.9412
     },
     {
       "model": "XGBoost (Champion Tuned)",
@@ -816,7 +828,9 @@
       "test_tn": 3780,
       "test_fp": 19,
       "test_fn": 262,
-      "test_tp": 802
+      "test_tp": 802,
+      "test_macro_avg_f1": 0.9075,
+      "test_weighted_avg_f1": 0.9394
     },
     {
       "model": "XGBoost (Balanced)",
@@ -838,7 +852,9 @@
       "test_tn": 3689,
       "test_fp": 110,
       "test_fn": 206,
-      "test_tp": 858
+      "test_tp": 858,
+      "test_macro_avg_f1": 0.9017,
+      "test_weighted_avg_f1": 0.9339
     },
     {
       "model": "Random Forest (Tuned)",
@@ -860,7 +876,9 @@
       "test_tn": 3710,
       "test_fp": 89,
       "test_fn": 253,
-      "test_tp": 811
+      "test_tp": 811,
+      "test_macro_avg_f1": 0.8909,
+      "test_weighted_avg_f1": 0.9275
     },
     {
       "model": "Decision Tree (Tuned)",
@@ -882,7 +900,9 @@
       "test_tn": 3760,
       "test_fp": 39,
       "test_fn": 291,
-      "test_tp": 773
+      "test_tp": 773,
+      "test_macro_avg_f1": 0.891,
+      "test_weighted_avg_f1": 0.9287
     },
     {
       "model": "Logistic Regression (Balanced)",
@@ -904,7 +924,9 @@
       "test_tn": 3252,
       "test_fp": 547,
       "test_fn": 198,
-      "test_tp": 866
+      "test_tp": 866,
+      "test_macro_avg_f1": 0.7982,
+      "test_weighted_avg_f1": 0.8539
     },
     {
       "model": "Logistic Regression (L2)",
@@ -926,7 +948,9 @@
       "test_tn": 3629,
       "test_fp": 170,
       "test_fn": 371,
-      "test_tp": 693
+      "test_tp": 693,
+      "test_macro_avg_f1": 0.8249,
+      "test_weighted_avg_f1": 0.8844
     },
     {
       "model": "Dummy Baseline (Stratified)",
@@ -948,7 +972,9 @@
       "test_tn": 2968,
       "test_fp": 831,
       "test_fn": 836,
-      "test_tp": 228
+      "test_tp": 228,
+      "test_macro_avg_f1": 0.4978,
+      "test_weighted_avg_f1": 0.6569
     }
   ],
   "shap_global_importance": [

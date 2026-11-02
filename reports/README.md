@@ -7,5 +7,6 @@ Analytical reports and visual figures:
 - `statistical_analysis.md` — Hypothesis testing (Mann-Whitney U, KS, Chi-Square, Cramér's V) and Weight of Evidence / Information Value report.
 - `model_evaluation_report.md` — Feature engineering, VIF, 8-model comparison, threshold optimization, calibration, and SHAP report.
 - `final_project_report.md` — Executive end-to-end project summary and underwriting recommendations.
+- `final_qa_report.md` — Independent Second-Phase QA execution report covering pytest results (`13 / 13`), notebook execution times, data quality audit, model leakage audit, and Streamlit AppTest verification.
 - `figures/` — All 16 generated PNG visualisations (`fig01`–`fig16`).
 

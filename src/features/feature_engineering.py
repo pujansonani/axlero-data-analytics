@@ -4,7 +4,7 @@ All stateful transformations (imputation, outlier caps, WoE mappings, scalers, e
 are fitted strictly on the training set and applied deterministically to validation/test sets.
 """
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -15,7 +15,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-from src.features.woe_iv import WoEIVAnalyzer
 from src.preprocessing.cleaner import GRADE_MAP, CreditRiskImputer
 
 ENGINEERED_FEATURE_DOCS = [

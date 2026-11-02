@@ -1,7 +1,7 @@
 """Model evaluation, threshold analysis, calibration, and SHAP explainability (Module 5 - Sowmya)."""
 
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Tuple
 
 import matplotlib
 matplotlib.use("Agg")
@@ -15,6 +15,7 @@ from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
     brier_score_loss,
+    classification_report,
     confusion_matrix,
     f1_score,
     precision_recall_curve,
@@ -24,7 +25,7 @@ from sklearn.metrics import (
     roc_curve,
 )
 
-from src.visualization.eda_plots import BLUE, GRID, INK, MUTED, ORANGE, PURPLE, TEAL, _save_fig, configure_plot_style
+from src.visualization.eda_plots import BLUE, INK, MUTED, ORANGE, PURPLE, TEAL, _save_fig, configure_plot_style
 
 
 def compute_classification_metrics(
@@ -87,6 +88,9 @@ def evaluate_all_models(
 
         m_val = compute_classification_metrics(y_val_arr, p_val, threshold=0.50)
         m_test = compute_classification_metrics(y_test_arr, p_test, threshold=0.50)
+        cls_rep = classification_report(
+            y_test_arr, (p_test >= 0.50).astype(int), output_dict=True, zero_division=0
+        )
 
         rows.append(
             {
@@ -110,10 +114,17 @@ def evaluate_all_models(
                 "test_fp": m_test["fp"],
                 "test_fn": m_test["fn"],
                 "test_tp": m_test["tp"],
+                "test_macro_avg_f1": round(float(cls_rep["macro avg"]["f1-score"]), 4),
+                "test_weighted_avg_f1": round(float(cls_rep["weighted avg"]["f1-score"]), 4),
             }
         )
 
-    df_eval = pd.DataFrame(rows).sort_values("test_roc_auc", ascending=False).reset_index(drop=True)
+    # Sort strictly by validation ROC-AUC (with 5-fold CV ROC-AUC as tie-breaker) to prevent test-set selection leakage
+    df_eval = (
+        pd.DataFrame(rows)
+        .sort_values(["val_roc_auc", "cv_roc_auc_mean"], ascending=[False, False])
+        .reset_index(drop=True)
+    )
     return df_eval, val_probs, test_probs
 
 

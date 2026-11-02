@@ -1,6 +1,5 @@
 """Unit tests for data loading, deduplication, invalid record handling, and imputation."""
 
-import numpy as np
 import pandas as pd
 import pytest
 

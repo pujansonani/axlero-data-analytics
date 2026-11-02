@@ -1,7 +1,6 @@
 """Unit tests for Statistical Analysis, WoE/IV calculations, and Feature Engineering pipeline."""
 
 import numpy as np
-import pandas as pd
 
 from src.data.load_data import load_validated_data, stratified_train_val_test_split
 from src.features.feature_engineering import CreditRiskFeatureEngineer, compute_vif_table

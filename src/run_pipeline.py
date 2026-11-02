@@ -1,8 +1,6 @@
 """End-to-end execution script for the Axlero Credit Risk Scoring & Loan Default Analysis pipeline."""
 
 import joblib
-import numpy as np
-import pandas as pd
 
 from src.data.load_data import (
     load_raw_data,

@@ -88,6 +88,40 @@ def test_saved_pipeline_loads_and_predicts_accurately():
     assert high_res["predicted_default"] == 1
     assert len(high_res["top_factors"]) == 8
 
+    # Verify strict prediction reproducibility
+    high_res_repeat = predict_single_borrower(bundle, high_risk_borrower)
+    assert high_res["default_probability"] == high_res_repeat["default_probability"]
+    assert high_res["top_factors"] == high_res_repeat["top_factors"]
+
+
+def test_streamlit_dashboard_all_8_pages_and_invalid_input():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(resolve_path("app/streamlit_app.py"), default_timeout=30)
+    at.run()
+    assert not at.exception
+
+    for page in [
+        "2. Dataset Overview",
+        "3. Data Quality & Preprocessing",
+        "4. Exploratory Data Analysis",
+        "5. Risk Factors & Statistical Analysis",
+        "6. WoE & IV Analysis",
+        "7. Model Performance Comparison",
+        "8. Credit Risk Prediction",
+    ]:
+        at.sidebar.radio[0].set_value(page).run()
+        assert not at.exception, f"Exception on {page}: {at.exception}"
+
+    # Trigger invalid input on Page 8 (Age=20, Employment Length=12.0 > 20-14)
+    at.number_input[0].set_value(20)
+    at.number_input[2].set_value(12.0)
+    at.button[-1].click().run()
+    assert not at.exception
+    assert len(at.error) > 0
+    assert "Input Validation Error" in at.error[0].value
+
+
 
 def test_no_hardcoded_local_paths_in_code_or_notebooks():
     root = resolve_path(".")
@@ -113,6 +147,7 @@ def test_all_16_figures_and_reports_exist():
         "statistical_analysis.md",
         "model_evaluation_report.md",
         "final_project_report.md",
+        "final_qa_report.md",
     ]:
         assert (root / "reports" / rep).exists(), f"Missing report {rep}"
 

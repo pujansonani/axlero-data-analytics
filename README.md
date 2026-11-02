@@ -106,7 +106,8 @@ axlero-data-analytics/
 │   ├── eda_report.md
 │   ├── statistical_analysis.md
 │   ├── model_evaluation_report.md
-│   └── final_project_report.md
+│   ├── final_project_report.md
+│   └── final_qa_report.md
 ├── models/
 │   ├── README.md
 │   ├── credit_risk_pipeline.joblib
