@@ -1,0 +1,833 @@
+{
+  "default_threshold_0_50_test_metrics": {
+    "threshold": 0.5,
+    "accuracy": 0.9439,
+    "precision": 0.9759,
+    "recall": 0.7622,
+    "specificity": 0.9947,
+    "f1_score": 0.8559,
+    "roc_auc": 0.9553,
+    "pr_auc": 0.9199,
+    "gini_coefficient": 0.9106,
+    "ks_statistic": 0.7891,
+    "brier_score": 0.0466,
+    "tn": 3779,
+    "fp": 20,
+    "fn": 253,
+    "tp": 811
+  },
+  "f1_optimal_threshold": 0.39,
+  "f1_optimal_val_f1": 0.8476,
+  "f1_optimal_test_metrics": {
+    "threshold": 0.39,
+    "accuracy": 0.9441,
+    "precision": 0.95,
+    "recall": 0.7857,
+    "specificity": 0.9884,
+    "f1_score": 0.8601,
+    "roc_auc": 0.9553,
+    "pr_auc": 0.9199,
+    "gini_coefficient": 0.9106,
+    "ks_statistic": 0.7891,
+    "brier_score": 0.0466,
+    "tn": 3755,
+    "fp": 44,
+    "fn": 228,
+    "tp": 836
+  },
+  "youden_optimal_threshold": 0.21,
+  "cost_optimal_threshold_5_to_1": 0.16,
+  "cost_optimal_test_metrics": {
+    "threshold": 0.16,
+    "accuracy": 0.9011,
+    "precision": 0.7315,
+    "recall": 0.8656,
+    "specificity": 0.911,
+    "f1_score": 0.7929,
+    "roc_auc": 0.9553,
+    "pr_auc": 0.9199,
+    "gini_coefficient": 0.9106,
+    "ks_statistic": 0.7891,
+    "brier_score": 0.0466,
+    "tn": 3461,
+    "fp": 338,
+    "fn": 143,
+    "tp": 921
+  },
+  "threshold_sweep_table": [
+    {
+      "threshold": 0.05,
+      "precision": 0.4032,
+      "recall": 0.9577,
+      "specificity": 0.6033,
+      "f1_score": 0.5674,
+      "youden_j": 0.561,
+      "expected_cost_per_loan": 0.3562
+    },
+    {
+      "threshold": 0.06,
+      "precision": 0.4384,
+      "recall": 0.9445,
+      "specificity": 0.6615,
+      "f1_score": 0.5989,
+      "youden_j": 0.606,
+      "expected_cost_per_loan": 0.3252
+    },
+    {
+      "threshold": 0.07,
+      "precision": 0.4707,
+      "recall": 0.9285,
+      "specificity": 0.7078,
+      "f1_score": 0.6247,
+      "youden_j": 0.6363,
+      "expected_cost_per_loan": 0.3065
+    },
+    {
+      "threshold": 0.08,
+      "precision": 0.5044,
+      "recall": 0.9144,
+      "specificity": 0.7486,
+      "f1_score": 0.6502,
+      "youden_j": 0.663,
+      "expected_cost_per_loan": 0.29
+    },
+    {
+      "threshold": 0.09,
+      "precision": 0.5367,
+      "recall": 0.9022,
+      "specificity": 0.782,
+      "f1_score": 0.673,
+      "youden_j": 0.6842,
+      "expected_cost_per_loan": 0.2773
+    },
+    {
+      "threshold": 0.1,
+      "precision": 0.5664,
+      "recall": 0.8946,
+      "specificity": 0.8084,
+      "f1_score": 0.6937,
+      "youden_j": 0.703,
+      "expected_cost_per_loan": 0.2649
+    },
+    {
+      "threshold": 0.11,
+      "precision": 0.5909,
+      "recall": 0.8899,
+      "specificity": 0.8276,
+      "f1_score": 0.7102,
+      "youden_j": 0.7175,
+      "expected_cost_per_loan": 0.255
+    },
+    {
+      "threshold": 0.12,
+      "precision": 0.616,
+      "recall": 0.8815,
+      "specificity": 0.8463,
+      "f1_score": 0.7252,
+      "youden_j": 0.7277,
+      "expected_cost_per_loan": 0.2497
+    },
+    {
+      "threshold": 0.13,
+      "precision": 0.6431,
+      "recall": 0.873,
+      "specificity": 0.8644,
+      "f1_score": 0.7406,
+      "youden_j": 0.7374,
+      "expected_cost_per_loan": 0.2448
+    },
+    {
+      "threshold": 0.14,
+      "precision": 0.6652,
+      "recall": 0.8655,
+      "specificity": 0.8781,
+      "f1_score": 0.7522,
+      "youden_j": 0.7436,
+      "expected_cost_per_loan": 0.2423
+    },
+    {
+      "threshold": 0.15,
+      "precision": 0.6908,
+      "recall": 0.8532,
+      "specificity": 0.8931,
+      "f1_score": 0.7635,
+      "youden_j": 0.7464,
+      "expected_cost_per_loan": 0.2439
+    },
+    {
+      "threshold": 0.16,
+      "precision": 0.7245,
+      "recall": 0.8485,
+      "specificity": 0.9097,
+      "f1_score": 0.7816,
+      "youden_j": 0.7583,
+      "expected_cost_per_loan": 0.2361
+    },
+    {
+      "threshold": 0.17,
+      "precision": 0.7473,
+      "recall": 0.8401,
+      "specificity": 0.9205,
+      "f1_score": 0.791,
+      "youden_j": 0.7606,
+      "expected_cost_per_loan": 0.2369
+    },
+    {
+      "threshold": 0.18,
+      "precision": 0.7723,
+      "recall": 0.8297,
+      "specificity": 0.9316,
+      "f1_score": 0.8,
+      "youden_j": 0.7613,
+      "expected_cost_per_loan": 0.2396
+    },
+    {
+      "threshold": 0.19,
+      "precision": 0.7851,
+      "recall": 0.8213,
+      "specificity": 0.9371,
+      "f1_score": 0.8028,
+      "youden_j": 0.7583,
+      "expected_cost_per_loan": 0.2445
+    },
+    {
+      "threshold": 0.2,
+      "precision": 0.8002,
+      "recall": 0.8175,
+      "specificity": 0.9429,
+      "f1_score": 0.8087,
+      "youden_j": 0.7604,
+      "expected_cost_per_loan": 0.2441
+    },
+    {
+      "threshold": 0.21,
+      "precision": 0.8191,
+      "recall": 0.8137,
+      "specificity": 0.9497,
+      "f1_score": 0.8164,
+      "youden_j": 0.7635,
+      "expected_cost_per_loan": 0.2429
+    },
+    {
+      "threshold": 0.22,
+      "precision": 0.8361,
+      "recall": 0.8062,
+      "specificity": 0.9558,
+      "f1_score": 0.8209,
+      "youden_j": 0.762,
+      "expected_cost_per_loan": 0.2464
+    },
+    {
+      "threshold": 0.23,
+      "precision": 0.8449,
+      "recall": 0.7996,
+      "specificity": 0.9589,
+      "f1_score": 0.8217,
+      "youden_j": 0.7586,
+      "expected_cost_per_loan": 0.2511
+    },
+    {
+      "threshold": 0.24,
+      "precision": 0.8615,
+      "recall": 0.7959,
+      "specificity": 0.9642,
+      "f1_score": 0.8274,
+      "youden_j": 0.7601,
+      "expected_cost_per_loan": 0.2511
+    },
+    {
+      "threshold": 0.25,
+      "precision": 0.8745,
+      "recall": 0.793,
+      "specificity": 0.9681,
+      "f1_score": 0.8318,
+      "youden_j": 0.7612,
+      "expected_cost_per_loan": 0.2511
+    },
+    {
+      "threshold": 0.26,
+      "precision": 0.8871,
+      "recall": 0.7912,
+      "specificity": 0.9718,
+      "f1_score": 0.8364,
+      "youden_j": 0.763,
+      "expected_cost_per_loan": 0.2503
+    },
+    {
+      "threshold": 0.27,
+      "precision": 0.894,
+      "recall": 0.7855,
+      "specificity": 0.9739,
+      "f1_score": 0.8363,
+      "youden_j": 0.7595,
+      "expected_cost_per_loan": 0.2548
+    },
+    {
+      "threshold": 0.28,
+      "precision": 0.8976,
+      "recall": 0.7836,
+      "specificity": 0.975,
+      "f1_score": 0.8368,
+      "youden_j": 0.7586,
+      "expected_cost_per_loan": 0.2561
+    },
+    {
+      "threshold": 0.29,
+      "precision": 0.9072,
+      "recall": 0.7817,
+      "specificity": 0.9776,
+      "f1_score": 0.8398,
+      "youden_j": 0.7594,
+      "expected_cost_per_loan": 0.2561
+    },
+    {
+      "threshold": 0.3,
+      "precision": 0.914,
+      "recall": 0.7799,
+      "specificity": 0.9795,
+      "f1_score": 0.8416,
+      "youden_j": 0.7593,
+      "expected_cost_per_loan": 0.2567
+    },
+    {
+      "threshold": 0.31,
+      "precision": 0.9198,
+      "recall": 0.777,
+      "specificity": 0.981,
+      "f1_score": 0.8424,
+      "youden_j": 0.7581,
+      "expected_cost_per_loan": 0.2585
+    },
+    {
+      "threshold": 0.32,
+      "precision": 0.9237,
+      "recall": 0.7742,
+      "specificity": 0.9821,
+      "f1_score": 0.8424,
+      "youden_j": 0.7563,
+      "expected_cost_per_loan": 0.2608
+    },
+    {
+      "threshold": 0.33,
+      "precision": 0.9278,
+      "recall": 0.7733,
+      "specificity": 0.9832,
+      "f1_score": 0.8435,
+      "youden_j": 0.7564,
+      "expected_cost_per_loan": 0.261
+    },
+    {
+      "threshold": 0.34,
+      "precision": 0.9295,
+      "recall": 0.7695,
+      "specificity": 0.9837,
+      "f1_score": 0.842,
+      "youden_j": 0.7532,
+      "expected_cost_per_loan": 0.2647
+    },
+    {
+      "threshold": 0.35,
+      "precision": 0.9348,
+      "recall": 0.7686,
+      "specificity": 0.985,
+      "f1_score": 0.8436,
+      "youden_j": 0.7536,
+      "expected_cost_per_loan": 0.2647
+    },
+    {
+      "threshold": 0.36,
+      "precision": 0.94,
+      "recall": 0.7667,
+      "specificity": 0.9863,
+      "f1_score": 0.8446,
+      "youden_j": 0.753,
+      "expected_cost_per_loan": 0.2657
+    },
+    {
+      "threshold": 0.37,
+      "precision": 0.9432,
+      "recall": 0.7648,
+      "specificity": 0.9871,
+      "f1_score": 0.8447,
+      "youden_j": 0.7519,
+      "expected_cost_per_loan": 0.2672
+    },
+    {
+      "threshold": 0.38,
+      "precision": 0.9464,
+      "recall": 0.7639,
+      "specificity": 0.9879,
+      "f1_score": 0.8454,
+      "youden_j": 0.7518,
+      "expected_cost_per_loan": 0.2676
+    },
+    {
+      "threshold": 0.39,
+      "precision": 0.9519,
+      "recall": 0.7639,
+      "specificity": 0.9892,
+      "f1_score": 0.8476,
+      "youden_j": 0.7531,
+      "expected_cost_per_loan": 0.2666
+    },
+    {
+      "threshold": 0.4,
+      "precision": 0.9573,
+      "recall": 0.7601,
+      "specificity": 0.9905,
+      "f1_score": 0.8474,
+      "youden_j": 0.7506,
+      "expected_cost_per_loan": 0.2696
+    },
+    {
+      "threshold": 0.41,
+      "precision": 0.9584,
+      "recall": 0.7582,
+      "specificity": 0.9908,
+      "f1_score": 0.8466,
+      "youden_j": 0.749,
+      "expected_cost_per_loan": 0.2715
+    },
+    {
+      "threshold": 0.42,
+      "precision": 0.9583,
+      "recall": 0.7573,
+      "specificity": 0.9908,
+      "f1_score": 0.846,
+      "youden_j": 0.7481,
+      "expected_cost_per_loan": 0.2725
+    },
+    {
+      "threshold": 0.43,
+      "precision": 0.9582,
+      "recall": 0.7545,
+      "specificity": 0.9908,
+      "f1_score": 0.8442,
+      "youden_j": 0.7453,
+      "expected_cost_per_loan": 0.2756
+    },
+    {
+      "threshold": 0.44,
+      "precision": 0.9592,
+      "recall": 0.7526,
+      "specificity": 0.9911,
+      "f1_score": 0.8434,
+      "youden_j": 0.7436,
+      "expected_cost_per_loan": 0.2775
+    },
+    {
+      "threshold": 0.45,
+      "precision": 0.9627,
+      "recall": 0.7516,
+      "specificity": 0.9918,
+      "f1_score": 0.8442,
+      "youden_j": 0.7435,
+      "expected_cost_per_loan": 0.2779
+    },
+    {
+      "threshold": 0.46,
+      "precision": 0.965,
+      "recall": 0.7516,
+      "specificity": 0.9924,
+      "f1_score": 0.8451,
+      "youden_j": 0.744,
+      "expected_cost_per_loan": 0.2775
+    },
+    {
+      "threshold": 0.47,
+      "precision": 0.9661,
+      "recall": 0.7498,
+      "specificity": 0.9926,
+      "f1_score": 0.8443,
+      "youden_j": 0.7424,
+      "expected_cost_per_loan": 0.2793
+    },
+    {
+      "threshold": 0.48,
+      "precision": 0.9672,
+      "recall": 0.7488,
+      "specificity": 0.9929,
+      "f1_score": 0.8441,
+      "youden_j": 0.7417,
+      "expected_cost_per_loan": 0.2801
+    },
+    {
+      "threshold": 0.49,
+      "precision": 0.9671,
+      "recall": 0.746,
+      "specificity": 0.9929,
+      "f1_score": 0.8423,
+      "youden_j": 0.7389,
+      "expected_cost_per_loan": 0.2832
+    },
+    {
+      "threshold": 0.5,
+      "precision": 0.9682,
+      "recall": 0.7441,
+      "specificity": 0.9932,
+      "f1_score": 0.8415,
+      "youden_j": 0.7373,
+      "expected_cost_per_loan": 0.2851
+    },
+    {
+      "threshold": 0.51,
+      "precision": 0.9693,
+      "recall": 0.7422,
+      "specificity": 0.9934,
+      "f1_score": 0.8407,
+      "youden_j": 0.7357,
+      "expected_cost_per_loan": 0.2869
+    },
+    {
+      "threshold": 0.52,
+      "precision": 0.9704,
+      "recall": 0.7404,
+      "specificity": 0.9937,
+      "f1_score": 0.8399,
+      "youden_j": 0.734,
+      "expected_cost_per_loan": 0.2888
+    },
+    {
+      "threshold": 0.53,
+      "precision": 0.9715,
+      "recall": 0.7385,
+      "specificity": 0.9939,
+      "f1_score": 0.8391,
+      "youden_j": 0.7324,
+      "expected_cost_per_loan": 0.2906
+    },
+    {
+      "threshold": 0.54,
+      "precision": 0.9739,
+      "recall": 0.7366,
+      "specificity": 0.9945,
+      "f1_score": 0.8388,
+      "youden_j": 0.7311,
+      "expected_cost_per_loan": 0.2923
+    },
+    {
+      "threshold": 0.55,
+      "precision": 0.9787,
+      "recall": 0.7347,
+      "specificity": 0.9955,
+      "f1_score": 0.8393,
+      "youden_j": 0.7302,
+      "expected_cost_per_loan": 0.2935
+    },
+    {
+      "threshold": 0.56,
+      "precision": 0.9798,
+      "recall": 0.7319,
+      "specificity": 0.9958,
+      "f1_score": 0.8379,
+      "youden_j": 0.7277,
+      "expected_cost_per_loan": 0.2964
+    },
+    {
+      "threshold": 0.57,
+      "precision": 0.9823,
+      "recall": 0.731,
+      "specificity": 0.9963,
+      "f1_score": 0.8382,
+      "youden_j": 0.7273,
+      "expected_cost_per_loan": 0.297
+    },
+    {
+      "threshold": 0.58,
+      "precision": 0.9848,
+      "recall": 0.731,
+      "specificity": 0.9968,
+      "f1_score": 0.8391,
+      "youden_j": 0.7278,
+      "expected_cost_per_loan": 0.2966
+    },
+    {
+      "threshold": 0.59,
+      "precision": 0.9848,
+      "recall": 0.73,
+      "specificity": 0.9968,
+      "f1_score": 0.8385,
+      "youden_j": 0.7269,
+      "expected_cost_per_loan": 0.2976
+    },
+    {
+      "threshold": 0.6,
+      "precision": 0.986,
+      "recall": 0.73,
+      "specificity": 0.9971,
+      "f1_score": 0.8389,
+      "youden_j": 0.7271,
+      "expected_cost_per_loan": 0.2974
+    },
+    {
+      "threshold": 0.61,
+      "precision": 0.986,
+      "recall": 0.73,
+      "specificity": 0.9971,
+      "f1_score": 0.8389,
+      "youden_j": 0.7271,
+      "expected_cost_per_loan": 0.2974
+    },
+    {
+      "threshold": 0.62,
+      "precision": 0.986,
+      "recall": 0.7281,
+      "specificity": 0.9971,
+      "f1_score": 0.8377,
+      "youden_j": 0.7252,
+      "expected_cost_per_loan": 0.2995
+    },
+    {
+      "threshold": 0.63,
+      "precision": 0.9872,
+      "recall": 0.7272,
+      "specificity": 0.9974,
+      "f1_score": 0.8375,
+      "youden_j": 0.7246,
+      "expected_cost_per_loan": 0.3003
+    },
+    {
+      "threshold": 0.64,
+      "precision": 0.9872,
+      "recall": 0.7253,
+      "specificity": 0.9974,
+      "f1_score": 0.8362,
+      "youden_j": 0.7227,
+      "expected_cost_per_loan": 0.3023
+    },
+    {
+      "threshold": 0.65,
+      "precision": 0.9884,
+      "recall": 0.7244,
+      "specificity": 0.9976,
+      "f1_score": 0.836,
+      "youden_j": 0.722,
+      "expected_cost_per_loan": 0.3032
+    },
+    {
+      "threshold": 0.66,
+      "precision": 0.9897,
+      "recall": 0.7234,
+      "specificity": 0.9979,
+      "f1_score": 0.8359,
+      "youden_j": 0.7213,
+      "expected_cost_per_loan": 0.304
+    },
+    {
+      "threshold": 0.67,
+      "precision": 0.991,
+      "recall": 0.7234,
+      "specificity": 0.9982,
+      "f1_score": 0.8363,
+      "youden_j": 0.7216,
+      "expected_cost_per_loan": 0.3038
+    },
+    {
+      "threshold": 0.68,
+      "precision": 0.9935,
+      "recall": 0.7215,
+      "specificity": 0.9987,
+      "f1_score": 0.836,
+      "youden_j": 0.7202,
+      "expected_cost_per_loan": 0.3054
+    },
+    {
+      "threshold": 0.69,
+      "precision": 0.9935,
+      "recall": 0.7215,
+      "specificity": 0.9987,
+      "f1_score": 0.836,
+      "youden_j": 0.7202,
+      "expected_cost_per_loan": 0.3054
+    },
+    {
+      "threshold": 0.7,
+      "precision": 0.9935,
+      "recall": 0.7206,
+      "specificity": 0.9987,
+      "f1_score": 0.8353,
+      "youden_j": 0.7193,
+      "expected_cost_per_loan": 0.3065
+    },
+    {
+      "threshold": 0.71,
+      "precision": 0.9935,
+      "recall": 0.7187,
+      "specificity": 0.9987,
+      "f1_score": 0.8341,
+      "youden_j": 0.7174,
+      "expected_cost_per_loan": 0.3085
+    },
+    {
+      "threshold": 0.72,
+      "precision": 0.9961,
+      "recall": 0.7159,
+      "specificity": 0.9992,
+      "f1_score": 0.8331,
+      "youden_j": 0.7151,
+      "expected_cost_per_loan": 0.3112
+    },
+    {
+      "threshold": 0.73,
+      "precision": 0.9961,
+      "recall": 0.714,
+      "specificity": 0.9992,
+      "f1_score": 0.8318,
+      "youden_j": 0.7132,
+      "expected_cost_per_loan": 0.3132
+    },
+    {
+      "threshold": 0.74,
+      "precision": 0.9961,
+      "recall": 0.7121,
+      "specificity": 0.9992,
+      "f1_score": 0.8305,
+      "youden_j": 0.7113,
+      "expected_cost_per_loan": 0.3153
+    },
+    {
+      "threshold": 0.75,
+      "precision": 0.996,
+      "recall": 0.7112,
+      "specificity": 0.9992,
+      "f1_score": 0.8299,
+      "youden_j": 0.7104,
+      "expected_cost_per_loan": 0.3163
+    },
+    {
+      "threshold": 0.76,
+      "precision": 0.996,
+      "recall": 0.7084,
+      "specificity": 0.9992,
+      "f1_score": 0.8279,
+      "youden_j": 0.7076,
+      "expected_cost_per_loan": 0.3194
+    },
+    {
+      "threshold": 0.77,
+      "precision": 0.996,
+      "recall": 0.7046,
+      "specificity": 0.9992,
+      "f1_score": 0.8253,
+      "youden_j": 0.7038,
+      "expected_cost_per_loan": 0.3235
+    },
+    {
+      "threshold": 0.78,
+      "precision": 0.9987,
+      "recall": 0.7037,
+      "specificity": 0.9997,
+      "f1_score": 0.8256,
+      "youden_j": 0.7034,
+      "expected_cost_per_loan": 0.3241
+    },
+    {
+      "threshold": 0.79,
+      "precision": 0.9987,
+      "recall": 0.7018,
+      "specificity": 0.9997,
+      "f1_score": 0.8243,
+      "youden_j": 0.7015,
+      "expected_cost_per_loan": 0.3262
+    },
+    {
+      "threshold": 0.8,
+      "precision": 0.9987,
+      "recall": 0.7008,
+      "specificity": 0.9997,
+      "f1_score": 0.8237,
+      "youden_j": 0.7006,
+      "expected_cost_per_loan": 0.3272
+    },
+    {
+      "threshold": 0.81,
+      "precision": 0.9987,
+      "recall": 0.698,
+      "specificity": 0.9997,
+      "f1_score": 0.8217,
+      "youden_j": 0.6978,
+      "expected_cost_per_loan": 0.3303
+    },
+    {
+      "threshold": 0.82,
+      "precision": 0.9986,
+      "recall": 0.6952,
+      "specificity": 0.9997,
+      "f1_score": 0.8197,
+      "youden_j": 0.6949,
+      "expected_cost_per_loan": 0.3334
+    },
+    {
+      "threshold": 0.83,
+      "precision": 1.0,
+      "recall": 0.6943,
+      "specificity": 1.0,
+      "f1_score": 0.8195,
+      "youden_j": 0.6943,
+      "expected_cost_per_loan": 0.3342
+    },
+    {
+      "threshold": 0.84,
+      "precision": 1.0,
+      "recall": 0.6905,
+      "specificity": 1.0,
+      "f1_score": 0.8169,
+      "youden_j": 0.6905,
+      "expected_cost_per_loan": 0.3383
+    },
+    {
+      "threshold": 0.85,
+      "precision": 1.0,
+      "recall": 0.6867,
+      "specificity": 1.0,
+      "f1_score": 0.8143,
+      "youden_j": 0.6867,
+      "expected_cost_per_loan": 0.3425
+    },
+    {
+      "threshold": 0.86,
+      "precision": 1.0,
+      "recall": 0.6849,
+      "specificity": 1.0,
+      "f1_score": 0.813,
+      "youden_j": 0.6849,
+      "expected_cost_per_loan": 0.3445
+    },
+    {
+      "threshold": 0.87,
+      "precision": 1.0,
+      "recall": 0.683,
+      "specificity": 1.0,
+      "f1_score": 0.8116,
+      "youden_j": 0.683,
+      "expected_cost_per_loan": 0.3466
+    },
+    {
+      "threshold": 0.88,
+      "precision": 1.0,
+      "recall": 0.6726,
+      "specificity": 1.0,
+      "f1_score": 0.8043,
+      "youden_j": 0.6726,
+      "expected_cost_per_loan": 0.3579
+    },
+    {
+      "threshold": 0.89,
+      "precision": 1.0,
+      "recall": 0.6679,
+      "specificity": 1.0,
+      "f1_score": 0.8009,
+      "youden_j": 0.6679,
+      "expected_cost_per_loan": 0.363
+    },
+    {
+      "threshold": 0.9,
+      "precision": 1.0,
+      "recall": 0.6613,
+      "specificity": 1.0,
+      "f1_score": 0.7961,
+      "youden_j": 0.6613,
+      "expected_cost_per_loan": 0.3702
+    }
+  ]
+}

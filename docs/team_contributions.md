@@ -1,0 +1,30 @@
+# Team Contributions & Git Provenance Audit
+
+In accordance with strict academic and professional integrity standards at Axlero Solutions, this document separates **verified prior Git contributions** (supported by branch commits and pull requests in `pujansonani/axlero-data-analytics`) from **modules implemented and enhanced during final project integration**.
+
+---
+
+## 1. Verified Git History & Pull Request Audit
+
+| Team Member | Git Branch | Verified Commit SHA & PR | Verified Original Files Submitted |
+| :--- | :--- | :--- | :--- |
+| **Pujan Sonani** *(Team Lead)* | `Main-TEAM-LEAD-ONLY` / `origin/Pujan` | `cbd7eca`, `65374c6`, `fb68765`, `96b19e5` | `.gitignore`, `README.md`, `requirements.txt`, initial directory structure (`data/`, `docs/`, `models/`, `notebooks/`, `reports/`, `src/`) |
+| **Darshan Patil** *(Member 1 — Data Preprocessing)* | `origin/Darshan` | `48d20e6` (PR #1: *Add Data Pipeline and Data Quality Deliverables*) | `data/processed/final_validated_dataset.csv` (`32,416 × 12`), `notebooks/data_preprocessing_validation.ipynb`, `reports/data_quality_checklist.md`, `.gitignore` update |
+| **Srirami Reddy Ailuri** *(Member 2 — EDA & Visualization)* | `origin/Sriram` | `77a35ff` (PR #2: *Member 2: EDA Figures, Observations and Captions*) | `member2_eda_visualization.ipynb`, `make_figures.py`, `EDA_observations.md`, `README.md`, 9 PNG figures (`fig01_loan_status.png` – `fig09_correlation_heatmap.png`) |
+| **Charukesh** *(Member 3 — Statistical Analysis & WoE/IV)* | `origin/charukesh` | `96b19e5` *(No commits beyond initial repo setup)* | None submitted prior to integration |
+| **Pavani** *(Member 4 — Feature Engineering & Selection)* | `origin/pavani` | `96b19e5` *(No commits beyond initial repo setup)* | None submitted prior to integration |
+| **Sowmya** *(Member 5 — Machine Learning & Evaluation)* | `origin/sowmya` | `96b19e5` *(No commits beyond initial repo setup)* | None submitted prior to integration |
+
+---
+
+## 2. Detailed Breakdown: Original Work Preserved vs. Integration Implementation
+
+| Module | Original Member Work Preserved | Enhancements & New Work Implemented During Integration |
+| :--- | :--- | :--- |
+| **Module 1: Data Understanding & Preprocessing** *(Darshan Patil)* | - Exact deduplication (`165` duplicates removed -> `32,416` rows).<br>- Invalid record rules (`person_age > 100`, `person_emp_length > 60`).<br>- Grade-wise median imputation for `loan_int_rate` and median imputation for `person_emp_length` and `person_age`.<br>- Identification of `1,005` `loan_percent_income` mismatches.<br>- Preserved `data/processed/final_validated_dataset.csv` and `reports/data_quality_checklist.md`. | - Removed hardcoded Windows OneDrive paths (`C:\Users\darsh\OneDrive\...`) in `notebooks/data_preprocessing_validation.ipynb`.<br>- Reconciled the `165` (`keep='first'`) vs `330` (`keep=False`) duplicate count output discrepancy.<br>- Implemented `CreditRiskImputer` and benchmarked Global Median vs Grade Median vs KNN (`k=5`) imputation.<br>- Mathematically decomposed all `1,005` `loan_percent_income` mismatches (`618` rounding boundary + `387` `0.85x` net-income scaled records).<br>- Created `notebooks/01_data_understanding.ipynb`, `notebooks/02_data_preprocessing.ipynb`, `src/preprocessing/cleaner.py`, and `reports/data_quality_report.md`. |
+| **Module 2: Exploratory Data Analysis** *(Srirami Reddy Ailuri)* | - All 9 core visualisations (`fig01`–`fig09`) and plotting logic (`make_figures.py`).<br>- All statistical observations, median comparisons, correlation findings, and multi-factor interaction insights (`EDA_observations.md`). | - Resolved nested folder duplication (`member2_analysis_visualization/member2_analysis_visualization/`).<br>- Integrated reproducible chart generation into `src/visualization/eda_plots.py`, `notebooks/03_exploratory_data_analysis.ipynb`, and `reports/eda_report.md` with complete numerical summary tables. |
+| **Module 3: Statistical Analysis & WoE/IV** *(Assigned to Charukesh; Implemented during Integration)* | - *No prior commits on `origin/charukesh`.* | - Implemented `src/features/statistical_tests.py` (Mann-Whitney U, KS, Welch's $t$, Point-Biserial, Spearman, Chi-Square, Cramér's V, Wilson 95% CIs, Odds Ratios).<br>- Implemented `src/features/woe_iv.py` (Laplace-smoothed $\alpha=0.5$ WoE/IV fitted strictly on training split).<br>- Created `fig10_woe_iv_summary.png`, `fig11_woe_curves.png`, `notebooks/04_statistical_analysis.ipynb`, `notebooks/05_woe_iv_analysis.ipynb`, and `reports/statistical_analysis.md`. |
+| **Module 4: Feature Engineering & Selection** *(Assigned to Pavani; Implemented during Integration)* | - *No prior commits on `origin/pavani`.* | - Implemented `src/features/feature_engineering.py` (`CreditRiskFeatureEngineer` with 14 domain features, train-only outlier capping & scaling, VIF multicollinearity audit, and composite ANOVA/MI/L1/RF feature selection).<br>- Created `notebooks/06_feature_engineering.ipynb`. |
+| **Module 5: Machine Learning & Evaluation** *(Assigned to Sowmya; Implemented during Integration)* | - *No prior commits on `origin/sowmya`.* | - Implemented `src/models/train_model.py` and `src/evaluation/evaluate_model.py` (Stratified 70/15/15 split, 8 models, 5-Fold CV tuning, threshold optimization at `0.50`/`0.39`/`0.16`, calibration, and TreeSHAP explainability).<br>- Generated `fig12`–`fig16`, serialized `models/credit_risk_pipeline.joblib` and `models/best_model.joblib`, and created `notebooks/07_model_training.ipynb`, `notebooks/08_model_evaluation.ipynb`, and `reports/model_evaluation_report.md`. |
+| **Module 6: Integration, Testing & Streamlit App** *(Pujan Sonani — Team Lead)* | - Initial repository setup, directory layout, `.gitignore`, and onboarding documentation. | - Integrated all branches, built `src/run_pipeline.py`, `app/streamlit_app.py` (8 pages), `tests/` (10 unit tests), `config/config.yaml`, `reports/final_project_report.md`, and `FINAL_STATUS.md`. |
+

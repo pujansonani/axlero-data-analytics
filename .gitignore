@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+.pytest_cache/
 
 # Virtual environments
 .venv/
@@ -36,21 +37,25 @@ venv.bak/
 *.swo
 *~
 
-# Data artifacts (exclude datasets, preserve directory documentation)
+# Data artifacts (preserve directory documentation and validated dataset from Member 1)
 data/raw/*
 !data/raw/README.md
 !data/raw/.gitkeep
+!data/raw/credit_risk_dataset.csv
 data/interim/*
 !data/interim/README.md
 !data/interim/.gitkeep
 data/processed/*
 !data/processed/README.md
 !data/processed/.gitkeep
+!data/processed/final_validated_dataset.csv
 
-# Model artifacts (exclude trained binaries, preserve directory documentation)
+# Model artifacts (preserve directory documentation and serialized pipeline/metadata)
 models/*
 !models/README.md
 !models/.gitkeep
+!models/*.json
+!models/*.joblib
 
 # Temporary files and logs
 *.log

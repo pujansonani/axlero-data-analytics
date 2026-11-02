@@ -1,0 +1,65 @@
+project:
+  name: "Axlero Solutions — Credit Risk Scoring and Loan Default Analysis"
+  domain: "Finance & Banking"
+  version: "1.0.0"
+  random_seed: 42
+
+paths:
+  raw_data: "data/raw/credit_risk_dataset.csv"
+  interim_cleaned_data: "data/interim/cleaned_credit_risk.csv"
+  processed_validated_data: "data/processed/final_validated_dataset.csv"
+  train_data: "data/processed/train_processed.csv"
+  val_data: "data/processed/val_processed.csv"
+  test_data: "data/processed/test_processed.csv"
+  figures_dir: "reports/figures"
+  reports_dir: "reports"
+  models_dir: "models"
+  best_model_path: "models/best_model.joblib"
+  pipeline_path: "models/credit_risk_pipeline.joblib"
+  metrics_summary_path: "models/all_models_summary.json"
+  threshold_analysis_path: "models/threshold_analysis.json"
+  woe_iv_summary_path: "models/woe_iv_summary.json"
+  statistical_summary_path: "models/statistical_summary.json"
+  imputation_comparison_path: "models/imputation_comparison.json"
+
+data_schema:
+  target: "loan_status"
+  numeric_columns:
+    - "person_age"
+    - "person_income"
+    - "person_emp_length"
+    - "loan_amnt"
+    - "loan_int_rate"
+    - "loan_percent_income"
+    - "cb_person_cred_hist_length"
+  categorical_columns:
+    - "person_home_ownership"
+    - "loan_intent"
+    - "loan_grade"
+    - "cb_person_default_on_file"
+
+preprocessing:
+  max_valid_age: 100
+  realistic_age_cap: 80
+  max_valid_emp_length: 60
+  realistic_emp_length_cap: 40
+  knn_neighbors: 5
+  income_outlier_percentile: 0.99
+
+splitting:
+  train_size: 0.70
+  val_size: 0.15
+  test_size: 0.15
+  stratify: true
+
+woe_iv:
+  num_bins: 10
+  laplace_smoothing: 0.5
+
+modeling:
+  cv_folds: 5
+  scoring_metric: "roc_auc"
+  risk_thresholds:
+    low_max: 0.20
+    medium_max: 0.50
+

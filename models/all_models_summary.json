@@ -1,0 +1,1068 @@
+{
+  "champion_model_name": "Gradient Boosting (Tuned)",
+  "split_sizes": {
+    "train_rows": 22691,
+    "val_rows": 4862,
+    "test_rows": 4863,
+    "train_default_rate_pct": 21.87,
+    "val_default_rate_pct": 21.86,
+    "test_default_rate_pct": 21.88
+  },
+  "engineered_features_docs": [
+    {
+      "feature": "calc_loan_to_income",
+      "formula": "loan_amnt / person_income",
+      "business_relevance": "Exact debt-to-income ratio removing the 1,005 rounding and 0.85 net-income discrepancies in raw loan_percent_income."
+    },
+    {
+      "feature": "ratio_discrepancy_flag",
+      "formula": "1 if |loan_amnt / person_income - loan_percent_income| > 0.01 else 0",
+      "business_relevance": "Identifies the 387 records where person_income reflects post-deduction (0.85x) net income relative to gross underwriting income."
+    },
+    {
+      "feature": "log_person_income",
+      "formula": "ln(1 + person_income)",
+      "business_relevance": "Compresses extreme right skewness in annual income (skew = 32.9, max = 6,000,000) to stabilize linear decision boundaries."
+    },
+    {
+      "feature": "log_loan_amnt",
+      "formula": "ln(1 + loan_amnt)",
+      "business_relevance": "Normalizes loan principal distribution across micro-loans (500) and maximum personal loans (35,000)."
+    },
+    {
+      "feature": "est_annual_debt_service",
+      "formula": "loan_amnt * (1 + loan_int_rate / 100) / 3.0",
+      "business_relevance": "Estimates annual principal + interest repayment obligation under a 3-year consumer loan horizon."
+    },
+    {
+      "feature": "debt_service_to_income",
+      "formula": "est_annual_debt_service / person_income",
+      "business_relevance": "Captures total interest-adjusted payment shock relative to annual income."
+    },
+    {
+      "feature": "log_residual_income",
+      "formula": "ln(1 + max(0, person_income - est_annual_debt_service))",
+      "business_relevance": "Measures the post-debt-service disposable income cushion available for living expenses."
+    },
+    {
+      "feature": "emp_to_working_age_ratio",
+      "formula": "person_emp_length / max(1, person_age - 18)",
+      "business_relevance": "Measures career tenure stability relative to total adult working years since age 18."
+    },
+    {
+      "feature": "cred_hist_to_working_age_ratio",
+      "formula": "cb_person_cred_hist_length / max(1, person_age - 18)",
+      "business_relevance": "Measures credit file maturity relative to adult age."
+    },
+    {
+      "feature": "loan_grade_num",
+      "formula": "Ordinal mapping A=1, B=2, C=3, D=4, E=5, F=6, G=7",
+      "business_relevance": "Preserves monotonic credit risk rank order across lender-assigned underwriting grades."
+    },
+    {
+      "feature": "high_burden_flag",
+      "formula": "1 if loan_percent_income > 0.30 else 0",
+      "business_relevance": "Captures the structural threshold above 30% loan-to-income where default rate jumps to 70.4%."
+    },
+    {
+      "feature": "subprime_grade_flag",
+      "formula": "1 if loan_grade in {D, E, F, G} else 0",
+      "business_relevance": "Captures the structural jump at Grade D+ where default rate surges from 20.8% (Grade C) to 59.1%+."
+    },
+    {
+      "feature": "grade_x_burden",
+      "formula": "loan_grade_num * loan_percent_income",
+      "business_relevance": "Interaction term capturing the compounding risk of a low credit grade combined with a high loan-to-income burden."
+    },
+    {
+      "feature": "int_rate_spread_over_grade",
+      "formula": "loan_int_rate - median(loan_int_rate | loan_grade)_train",
+      "business_relevance": "Isolates borrower-specific pricing premium above or below the typical interest rate for their assigned grade."
+    }
+  ],
+  "feature_ranking": [
+    {
+      "feature": "grade_x_burden",
+      "anova_f_stat": 6301.02,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.1222,
+      "l1_abs_coef": 0.3282,
+      "rf_gini_importance": 0.0656,
+      "composite_score": 0.6549,
+      "rank": 1,
+      "selected": true
+    },
+    {
+      "feature": "calc_loan_to_income",
+      "anova_f_stat": 3954.03,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.1083,
+      "l1_abs_coef": 0.3349,
+      "rf_gini_importance": 0.0892,
+      "composite_score": 0.6202,
+      "rank": 2,
+      "selected": true
+    },
+    {
+      "feature": "debt_service_to_income",
+      "anova_f_stat": 4278.07,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.1067,
+      "l1_abs_coef": 0.0,
+      "rf_gini_importance": 0.0807,
+      "composite_score": 0.5862,
+      "rank": 3,
+      "selected": true
+    },
+    {
+      "feature": "high_burden_flag",
+      "anova_f_stat": 5082.32,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.0729,
+      "l1_abs_coef": 2.5315,
+      "rf_gini_importance": 0.0468,
+      "composite_score": 0.5703,
+      "rank": 4,
+      "selected": true
+    },
+    {
+      "feature": "subprime_grade_flag",
+      "anova_f_stat": 4263.28,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.0682,
+      "l1_abs_coef": 1.6501,
+      "rf_gini_importance": 0.072,
+      "composite_score": 0.5636,
+      "rank": 5,
+      "selected": true
+    },
+    {
+      "feature": "loan_grade_num",
+      "anova_f_stat": 3600.18,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.069,
+      "l1_abs_coef": 0.7009,
+      "rf_gini_importance": 0.0842,
+      "composite_score": 0.5323,
+      "rank": 6,
+      "selected": true
+    },
+    {
+      "feature": "home_RENT",
+      "anova_f_stat": 1371.79,
+      "anova_p_value": 1.3285798485865815e-291,
+      "mutual_info": 0.0283,
+      "l1_abs_coef": 2.4533,
+      "rf_gini_importance": 0.1043,
+      "composite_score": 0.5228,
+      "rank": 7,
+      "selected": true
+    },
+    {
+      "feature": "loan_percent_income",
+      "anova_f_stat": 3794.22,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.0837,
+      "l1_abs_coef": 0.0,
+      "rf_gini_importance": 0.0611,
+      "composite_score": 0.4674,
+      "rank": 8,
+      "selected": true
+    },
+    {
+      "feature": "log_person_income",
+      "anova_f_stat": 1939.11,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.1106,
+      "l1_abs_coef": 0.5924,
+      "rf_gini_importance": 0.0363,
+      "composite_score": 0.4215,
+      "rank": 9,
+      "selected": true
+    },
+    {
+      "feature": "log_residual_income",
+      "anova_f_stat": 2282.68,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.0786,
+      "l1_abs_coef": 0.7183,
+      "rf_gini_importance": 0.0482,
+      "composite_score": 0.4074,
+      "rank": 10,
+      "selected": true
+    },
+    {
+      "feature": "ratio_discrepancy_flag",
+      "anova_f_stat": 1064.18,
+      "anova_p_value": 3.719680842224658e-228,
+      "mutual_info": 0.0171,
+      "l1_abs_coef": 5.0541,
+      "rf_gini_importance": 0.0305,
+      "composite_score": 0.4065,
+      "rank": 11,
+      "selected": true
+    },
+    {
+      "feature": "person_income_capped",
+      "anova_f_stat": 1046.81,
+      "anova_p_value": 1.504270699598212e-224,
+      "mutual_info": 0.1098,
+      "l1_abs_coef": 0.7217,
+      "rf_gini_importance": 0.0351,
+      "composite_score": 0.3945,
+      "rank": 12,
+      "selected": false
+    },
+    {
+      "feature": "loan_int_rate",
+      "anova_f_stat": 2772.78,
+      "anova_p_value": 0.0,
+      "mutual_info": 0.0736,
+      "l1_abs_coef": 0.0,
+      "rf_gini_importance": 0.0524,
+      "composite_score": 0.3893,
+      "rank": 13,
+      "selected": true
+    },
+    {
+      "feature": "home_MORTGAGE",
+      "anova_f_stat": 826.11,
+      "anova_p_value": 1.7856484484602985e-178,
+      "mutual_info": 0.0196,
+      "l1_abs_coef": 1.4988,
+      "rf_gini_importance": 0.0333,
+      "composite_score": 0.2362,
+      "rank": 14,
+      "selected": true
+    },
+    {
+      "feature": "est_annual_debt_service",
+      "anova_f_stat": 342.77,
+      "anova_p_value": 5.772040776658576e-76,
+      "mutual_info": 0.0554,
+      "l1_abs_coef": 0.0094,
+      "rf_gini_importance": 0.0144,
+      "composite_score": 0.1661,
+      "rank": 15,
+      "selected": false
+    },
+    {
+      "feature": "intent_DEBTCONSOLIDATION",
+      "anova_f_stat": 94.09,
+      "anova_p_value": 3.325039290021597e-22,
+      "mutual_info": 0.0061,
+      "l1_abs_coef": 0.9618,
+      "rf_gini_importance": 0.0248,
+      "composite_score": 0.1344,
+      "rank": 16,
+      "selected": true
+    },
+    {
+      "feature": "int_rate_spread_over_grade",
+      "anova_f_stat": 38.66,
+      "anova_p_value": 5.128424358570061e-10,
+      "mutual_info": 0.0497,
+      "l1_abs_coef": 0.0349,
+      "rf_gini_importance": 0.0085,
+      "composite_score": 0.1291,
+      "rank": 17,
+      "selected": true
+    },
+    {
+      "feature": "person_emp_length",
+      "anova_f_stat": 179.86,
+      "anova_p_value": 7.448399678950373e-41,
+      "mutual_info": 0.0103,
+      "l1_abs_coef": 0.0515,
+      "rf_gini_importance": 0.0235,
+      "composite_score": 0.0969,
+      "rank": 18,
+      "selected": true
+    },
+    {
+      "feature": "intent_MEDICAL",
+      "anova_f_stat": 84.05,
+      "anova_p_value": 5.2240912791392305e-20,
+      "mutual_info": 0.0032,
+      "l1_abs_coef": 0.4325,
+      "rf_gini_importance": 0.0164,
+      "composite_score": 0.0778,
+      "rank": 19,
+      "selected": true
+    },
+    {
+      "feature": "intent_HOMEIMPROVEMENT",
+      "anova_f_stat": 39.66,
+      "anova_p_value": 3.082298795430372e-10,
+      "mutual_info": 0.0,
+      "l1_abs_coef": 1.1433,
+      "rf_gini_importance": 0.0068,
+      "composite_score": 0.0774,
+      "rank": 20,
+      "selected": true
+    },
+    {
+      "feature": "loan_amnt",
+      "anova_f_stat": 266.04,
+      "anova_p_value": 1.8083186584819749e-59,
+      "mutual_info": 0.0184,
+      "l1_abs_coef": 0.0,
+      "rf_gini_importance": 0.0106,
+      "composite_score": 0.0766,
+      "rank": 21,
+      "selected": true
+    },
+    {
+      "feature": "emp_to_working_age_ratio",
+      "anova_f_stat": 99.15,
+      "anova_p_value": 2.6194991112262856e-23,
+      "mutual_info": 0.0109,
+      "l1_abs_coef": 0.0041,
+      "rf_gini_importance": 0.0151,
+      "composite_score": 0.0691,
+      "rank": 22,
+      "selected": true
+    },
+    {
+      "feature": "log_loan_amnt",
+      "anova_f_stat": 145.9,
+      "anova_p_value": 1.7277742826841893e-33,
+      "mutual_info": 0.0157,
+      "l1_abs_coef": 0.0283,
+      "rf_gini_importance": 0.0104,
+      "composite_score": 0.0681,
+      "rank": 23,
+      "selected": true
+    },
+    {
+      "feature": "prior_default_Y",
+      "anova_f_stat": 736.58,
+      "anova_p_value": 1.1748762548993008e-159,
+      "mutual_info": 0.015,
+      "l1_abs_coef": 0.0,
+      "rf_gini_importance": 0.0047,
+      "composite_score": 0.0676,
+      "rank": 24,
+      "selected": true
+    },
+    {
+      "feature": "home_OTHER",
+      "anova_f_stat": 4.75,
+      "anova_p_value": 0.029286863026228776,
+      "mutual_info": 0.0048,
+      "l1_abs_coef": 0.8516,
+      "rf_gini_importance": 0.0007,
+      "composite_score": 0.0541,
+      "rank": 25,
+      "selected": true
+    },
+    {
+      "feature": "intent_EDUCATION",
+      "anova_f_stat": 68.49,
+      "anova_p_value": 1.3422566361214673e-16,
+      "mutual_info": 0.0057,
+      "l1_abs_coef": 0.072,
+      "rf_gini_importance": 0.0048,
+      "composite_score": 0.0312,
+      "rank": 26,
+      "selected": true
+    },
+    {
+      "feature": "person_age",
+      "anova_f_stat": 8.38,
+      "anova_p_value": 0.0038036112518721856,
+      "mutual_info": 0.0026,
+      "l1_abs_coef": 0.0023,
+      "rf_gini_importance": 0.0067,
+      "composite_score": 0.025,
+      "rank": 27,
+      "selected": true
+    },
+    {
+      "feature": "intent_PERSONAL",
+      "anova_f_stat": 12.07,
+      "anova_p_value": 0.0005136387656999895,
+      "mutual_info": 0.0,
+      "l1_abs_coef": 0.2724,
+      "rf_gini_importance": 0.0027,
+      "composite_score": 0.0216,
+      "rank": 28,
+      "selected": true
+    },
+    {
+      "feature": "cred_hist_to_working_age_ratio",
+      "anova_f_stat": 4.08,
+      "anova_p_value": 0.04334702469020202,
+      "mutual_info": 0.0,
+      "l1_abs_coef": 0.0055,
+      "rf_gini_importance": 0.0058,
+      "composite_score": 0.0171,
+      "rank": 29,
+      "selected": true
+    },
+    {
+      "feature": "cb_person_cred_hist_length",
+      "anova_f_stat": 5.02,
+      "anova_p_value": 0.025074602961050844,
+      "mutual_info": 0.0,
+      "l1_abs_coef": 0.0214,
+      "rf_gini_importance": 0.0045,
+      "composite_score": 0.0142,
+      "rank": 30,
+      "selected": true
+    }
+  ],
+  "selected_features": [
+    "grade_x_burden",
+    "calc_loan_to_income",
+    "debt_service_to_income",
+    "high_burden_flag",
+    "subprime_grade_flag",
+    "loan_grade_num",
+    "home_RENT",
+    "loan_percent_income",
+    "log_person_income",
+    "log_residual_income",
+    "ratio_discrepancy_flag",
+    "loan_int_rate",
+    "home_MORTGAGE",
+    "intent_DEBTCONSOLIDATION",
+    "int_rate_spread_over_grade",
+    "person_emp_length",
+    "intent_MEDICAL",
+    "intent_HOMEIMPROVEMENT",
+    "loan_amnt",
+    "emp_to_working_age_ratio",
+    "log_loan_amnt",
+    "prior_default_Y",
+    "home_OTHER",
+    "intent_EDUCATION",
+    "person_age",
+    "intent_PERSONAL",
+    "cred_hist_to_working_age_ratio",
+    "cb_person_cred_hist_length"
+  ],
+  "vif_before_selection": [
+    {
+      "feature": "log_residual_income",
+      "vif": 473700.46,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "log_person_income",
+      "vif": 442189.25,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "debt_service_to_income",
+      "vif": 13295.64,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "calc_loan_to_income",
+      "vif": 11703.31,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "est_annual_debt_service",
+      "vif": 1850.82,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_amnt",
+      "vif": 1848.46,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_percent_income",
+      "vif": 1034.66,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_grade_num",
+      "vif": 104.23,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_int_rate",
+      "vif": 87.8,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "grade_x_burden",
+      "vif": 66.77,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "log_loan_amnt",
+      "vif": 20.54,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "cb_person_cred_hist_length",
+      "vif": 15.64,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "person_age",
+      "vif": 13.83,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "person_income_capped",
+      "vif": 7.09,
+      "multicollinearity_status": "Moderate (5 - 10)"
+    },
+    {
+      "feature": "int_rate_spread_over_grade",
+      "vif": 6.82,
+      "multicollinearity_status": "Moderate (5 - 10)"
+    },
+    {
+      "feature": "subprime_grade_flag",
+      "vif": 4.37,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_MORTGAGE",
+      "vif": 3.92,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_RENT",
+      "vif": 3.8,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "emp_to_working_age_ratio",
+      "vif": 3.77,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "cred_hist_to_working_age_ratio",
+      "vif": 3.68,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "person_emp_length",
+      "vif": 3.33,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "high_burden_flag",
+      "vif": 2.99,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "ratio_discrepancy_flag",
+      "vif": 2.33,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_MEDICAL",
+      "vif": 1.75,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_EDUCATION",
+      "vif": 1.71,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_DEBTCONSOLIDATION",
+      "vif": 1.63,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_PERSONAL",
+      "vif": 1.63,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_HOMEIMPROVEMENT",
+      "vif": 1.46,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "prior_default_Y",
+      "vif": 1.42,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_OTHER",
+      "vif": 1.04,
+      "multicollinearity_status": "Low (< 5)"
+    }
+  ],
+  "vif_after_selection": [
+    {
+      "feature": "log_residual_income",
+      "vif": 473626.1,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "log_person_income",
+      "vif": 442069.66,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "debt_service_to_income",
+      "vif": 12631.99,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "calc_loan_to_income",
+      "vif": 11108.24,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_percent_income",
+      "vif": 1032.65,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_grade_num",
+      "vif": 102.26,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_int_rate",
+      "vif": 87.44,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "grade_x_burden",
+      "vif": 66.74,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "log_loan_amnt",
+      "vif": 20.14,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "cb_person_cred_hist_length",
+      "vif": 15.63,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "person_age",
+      "vif": 13.82,
+      "multicollinearity_status": "High (>= 10, Collinear)"
+    },
+    {
+      "feature": "loan_amnt",
+      "vif": 7.53,
+      "multicollinearity_status": "Moderate (5 - 10)"
+    },
+    {
+      "feature": "int_rate_spread_over_grade",
+      "vif": 6.68,
+      "multicollinearity_status": "Moderate (5 - 10)"
+    },
+    {
+      "feature": "subprime_grade_flag",
+      "vif": 4.36,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_MORTGAGE",
+      "vif": 3.9,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_RENT",
+      "vif": 3.79,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "emp_to_working_age_ratio",
+      "vif": 3.76,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "cred_hist_to_working_age_ratio",
+      "vif": 3.67,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "person_emp_length",
+      "vif": 3.33,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "high_burden_flag",
+      "vif": 2.99,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "ratio_discrepancy_flag",
+      "vif": 2.33,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_MEDICAL",
+      "vif": 1.74,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_EDUCATION",
+      "vif": 1.71,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_DEBTCONSOLIDATION",
+      "vif": 1.63,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_PERSONAL",
+      "vif": 1.63,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "intent_HOMEIMPROVEMENT",
+      "vif": 1.46,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "prior_default_Y",
+      "vif": 1.42,
+      "multicollinearity_status": "Low (< 5)"
+    },
+    {
+      "feature": "home_OTHER",
+      "vif": 1.04,
+      "multicollinearity_status": "Low (< 5)"
+    }
+  ],
+  "hyperparameter_tuning": {
+    "Logistic Regression": {
+      "best_params": {
+        "class_weight": "balanced",
+        "C": 2.0
+      },
+      "best_cv_roc_auc": 0.899
+    },
+    "Decision Tree": {
+      "best_params": {
+        "min_samples_leaf": 40,
+        "max_depth": 12,
+        "criterion": "entropy"
+      },
+      "best_cv_roc_auc": 0.9086
+    },
+    "Random Forest": {
+      "best_params": {
+        "n_estimators": 250,
+        "min_samples_leaf": 3,
+        "max_depth": 18,
+        "class_weight": null
+      },
+      "best_cv_roc_auc": 0.9255
+    },
+    "XGBoost": {
+      "best_params": {
+        "subsample": 0.85,
+        "n_estimators": 350,
+        "min_child_weight": 3,
+        "max_depth": 7,
+        "learning_rate": 0.04,
+        "colsample_bytree": 0.9
+      },
+      "best_cv_roc_auc": 0.9445
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "Gradient Boosting (Tuned)",
+      "cv_roc_auc_mean": 0.9442,
+      "cv_roc_auc_std": 0.0061,
+      "val_roc_auc": 0.9469,
+      "val_pr_auc": 0.9073,
+      "val_f1": 0.8415,
+      "test_accuracy": 0.9439,
+      "test_precision": 0.9759,
+      "test_recall": 0.7622,
+      "test_specificity": 0.9947,
+      "test_f1": 0.8559,
+      "test_roc_auc": 0.9553,
+      "test_pr_auc": 0.9199,
+      "test_ks_stat": 0.7891,
+      "test_gini": 0.9106,
+      "test_brier": 0.0466,
+      "test_tn": 3779,
+      "test_fp": 20,
+      "test_fn": 253,
+      "test_tp": 811
+    },
+    {
+      "model": "XGBoost (Champion Tuned)",
+      "cv_roc_auc_mean": 0.9438,
+      "cv_roc_auc_std": 0.0062,
+      "val_roc_auc": 0.9463,
+      "val_pr_auc": 0.9045,
+      "val_f1": 0.8379,
+      "test_accuracy": 0.9422,
+      "test_precision": 0.9769,
+      "test_recall": 0.7538,
+      "test_specificity": 0.995,
+      "test_f1": 0.8509,
+      "test_roc_auc": 0.9547,
+      "test_pr_auc": 0.9182,
+      "test_ks_stat": 0.7818,
+      "test_gini": 0.9093,
+      "test_brier": 0.0473,
+      "test_tn": 3780,
+      "test_fp": 19,
+      "test_fn": 262,
+      "test_tp": 802
+    },
+    {
+      "model": "XGBoost (Balanced)",
+      "cv_roc_auc_mean": 0.9441,
+      "cv_roc_auc_std": 0.0068,
+      "val_roc_auc": 0.9451,
+      "val_pr_auc": 0.9034,
+      "val_f1": 0.8375,
+      "test_accuracy": 0.935,
+      "test_precision": 0.8864,
+      "test_recall": 0.8064,
+      "test_specificity": 0.971,
+      "test_f1": 0.8445,
+      "test_roc_auc": 0.9529,
+      "test_pr_auc": 0.9165,
+      "test_ks_stat": 0.7834,
+      "test_gini": 0.9057,
+      "test_brier": 0.0576,
+      "test_tn": 3689,
+      "test_fp": 110,
+      "test_fn": 206,
+      "test_tp": 858
+    },
+    {
+      "model": "Random Forest (Tuned)",
+      "cv_roc_auc_mean": 0.9239,
+      "cv_roc_auc_std": 0.0077,
+      "val_roc_auc": 0.9232,
+      "val_pr_auc": 0.8759,
+      "val_f1": 0.8155,
+      "test_accuracy": 0.9297,
+      "test_precision": 0.9011,
+      "test_recall": 0.7622,
+      "test_specificity": 0.9766,
+      "test_f1": 0.8259,
+      "test_roc_auc": 0.9355,
+      "test_pr_auc": 0.8946,
+      "test_ks_stat": 0.7549,
+      "test_gini": 0.8709,
+      "test_brier": 0.0661,
+      "test_tn": 3710,
+      "test_fp": 89,
+      "test_fn": 253,
+      "test_tp": 811
+    },
+    {
+      "model": "Decision Tree (Tuned)",
+      "cv_roc_auc_mean": 0.906,
+      "cv_roc_auc_std": 0.0105,
+      "val_roc_auc": 0.9041,
+      "val_pr_auc": 0.8473,
+      "val_f1": 0.8117,
+      "test_accuracy": 0.9321,
+      "test_precision": 0.952,
+      "test_recall": 0.7265,
+      "test_specificity": 0.9897,
+      "test_f1": 0.8241,
+      "test_roc_auc": 0.9154,
+      "test_pr_auc": 0.8626,
+      "test_ks_stat": 0.7184,
+      "test_gini": 0.8308,
+      "test_brier": 0.0591,
+      "test_tn": 3760,
+      "test_fp": 39,
+      "test_fn": 291,
+      "test_tp": 773
+    },
+    {
+      "model": "Logistic Regression (Balanced)",
+      "cv_roc_auc_mean": 0.899,
+      "cv_roc_auc_std": 0.0069,
+      "val_roc_auc": 0.8997,
+      "val_pr_auc": 0.7876,
+      "val_f1": 0.6984,
+      "test_accuracy": 0.8468,
+      "test_precision": 0.6129,
+      "test_recall": 0.8139,
+      "test_specificity": 0.856,
+      "test_f1": 0.6992,
+      "test_roc_auc": 0.9017,
+      "test_pr_auc": 0.7834,
+      "test_ks_stat": 0.6895,
+      "test_gini": 0.8033,
+      "test_brier": 0.1173,
+      "test_tn": 3252,
+      "test_fp": 547,
+      "test_fn": 198,
+      "test_tp": 866
+    },
+    {
+      "model": "Logistic Regression (L2)",
+      "cv_roc_auc_mean": 0.8968,
+      "cv_roc_auc_std": 0.0073,
+      "val_roc_auc": 0.8972,
+      "val_pr_auc": 0.7997,
+      "val_f1": 0.7198,
+      "test_accuracy": 0.8888,
+      "test_precision": 0.803,
+      "test_recall": 0.6513,
+      "test_specificity": 0.9553,
+      "test_f1": 0.7193,
+      "test_roc_auc": 0.8997,
+      "test_pr_auc": 0.7983,
+      "test_ks_stat": 0.692,
+      "test_gini": 0.7995,
+      "test_brier": 0.0856,
+      "test_tn": 3629,
+      "test_fp": 170,
+      "test_fn": 371,
+      "test_tp": 693
+    },
+    {
+      "model": "Dummy Baseline (Stratified)",
+      "cv_roc_auc_mean": 0.5046,
+      "cv_roc_auc_std": 0.008,
+      "val_roc_auc": 0.4961,
+      "val_pr_auc": 0.2173,
+      "val_f1": 0.2121,
+      "test_accuracy": 0.6572,
+      "test_precision": 0.2153,
+      "test_recall": 0.2143,
+      "test_specificity": 0.7813,
+      "test_f1": 0.2148,
+      "test_roc_auc": 0.4978,
+      "test_pr_auc": 0.218,
+      "test_ks_stat": 0.0,
+      "test_gini": -0.0045,
+      "test_brier": 0.3428,
+      "test_tn": 2968,
+      "test_fp": 831,
+      "test_fn": 836,
+      "test_tp": 228
+    }
+  ],
+  "shap_global_importance": [
+    {
+      "feature": "home_RENT",
+      "mean_abs_shap": 0.7886
+    },
+    {
+      "feature": "log_person_income",
+      "mean_abs_shap": 0.5877
+    },
+    {
+      "feature": "calc_loan_to_income",
+      "mean_abs_shap": 0.5757
+    },
+    {
+      "feature": "home_MORTGAGE",
+      "mean_abs_shap": 0.3607
+    },
+    {
+      "feature": "loan_int_rate",
+      "mean_abs_shap": 0.3318
+    },
+    {
+      "feature": "intent_HOMEIMPROVEMENT",
+      "mean_abs_shap": 0.2869
+    },
+    {
+      "feature": "grade_x_burden",
+      "mean_abs_shap": 0.2792
+    },
+    {
+      "feature": "subprime_grade_flag",
+      "mean_abs_shap": 0.265
+    },
+    {
+      "feature": "loan_grade_num",
+      "mean_abs_shap": 0.2425
+    },
+    {
+      "feature": "intent_DEBTCONSOLIDATION",
+      "mean_abs_shap": 0.2341
+    },
+    {
+      "feature": "debt_service_to_income",
+      "mean_abs_shap": 0.1846
+    },
+    {
+      "feature": "log_residual_income",
+      "mean_abs_shap": 0.1197
+    },
+    {
+      "feature": "intent_MEDICAL",
+      "mean_abs_shap": 0.1118
+    },
+    {
+      "feature": "ratio_discrepancy_flag",
+      "mean_abs_shap": 0.1082
+    },
+    {
+      "feature": "person_emp_length",
+      "mean_abs_shap": 0.103
+    },
+    {
+      "feature": "intent_EDUCATION",
+      "mean_abs_shap": 0.1
+    },
+    {
+      "feature": "intent_PERSONAL",
+      "mean_abs_shap": 0.0983
+    },
+    {
+      "feature": "person_age",
+      "mean_abs_shap": 0.0896
+    },
+    {
+      "feature": "log_loan_amnt",
+      "mean_abs_shap": 0.0695
+    },
+    {
+      "feature": "int_rate_spread_over_grade",
+      "mean_abs_shap": 0.0604
+    },
+    {
+      "feature": "emp_to_working_age_ratio",
+      "mean_abs_shap": 0.0582
+    },
+    {
+      "feature": "high_burden_flag",
+      "mean_abs_shap": 0.0579
+    },
+    {
+      "feature": "cred_hist_to_working_age_ratio",
+      "mean_abs_shap": 0.056
+    },
+    {
+      "feature": "loan_amnt",
+      "mean_abs_shap": 0.0475
+    },
+    {
+      "feature": "loan_percent_income",
+      "mean_abs_shap": 0.047
+    },
+    {
+      "feature": "cb_person_cred_hist_length",
+      "mean_abs_shap": 0.0219
+    },
+    {
+      "feature": "home_OTHER",
+      "mean_abs_shap": 0.0105
+    },
+    {
+      "feature": "prior_default_Y",
+      "mean_abs_shap": 0.0096
+    }
+  ]
+}

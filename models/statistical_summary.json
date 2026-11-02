@@ -1,0 +1,621 @@
+{
+  "eda_summary": {
+    "overall_default_rate_pct": 21.87,
+    "grade_table": {
+      "A": {
+        "rate": 9.96,
+        "count": 10703
+      },
+      "B": {
+        "rate": 16.32,
+        "count": 10387
+      },
+      "C": {
+        "rate": 20.75,
+        "count": 6438
+      },
+      "D": {
+        "rate": 59.06,
+        "count": 3620
+      },
+      "E": {
+        "rate": 64.49,
+        "count": 963
+      },
+      "F": {
+        "rate": 70.54,
+        "count": 241
+      },
+      "G": {
+        "rate": 98.44,
+        "count": 64
+      }
+    },
+    "burden_table": {
+      "<= 10%": {
+        "rate": 11.75,
+        "count": 10430
+      },
+      "10-20%": {
+        "rate": 15.13,
+        "count": 11999
+      },
+      "20-30%": {
+        "rate": 22.02,
+        "count": 6168
+      },
+      "> 30%": {
+        "rate": 70.44,
+        "count": 3819
+      }
+    },
+    "prior_default_table": {
+      "No Prior Default (N)": {
+        "rate": 18.43,
+        "count": 26686
+      },
+      "Prior Default (Y)": {
+        "rate": 37.87,
+        "count": 5730
+      }
+    },
+    "home_ownership_table": {
+      "OWN": {
+        "rate": 7.49,
+        "count": 2563
+      },
+      "MORTGAGE": {
+        "rate": 12.62,
+        "count": 13369
+      },
+      "RENT": {
+        "rate": 31.61,
+        "count": 16378
+      },
+      "OTHER": {
+        "rate": 31.13,
+        "count": 106
+      }
+    },
+    "intent_table": {
+      "Debt Consol.": {
+        "rate": 28.68,
+        "count": 5189
+      },
+      "Medical": {
+        "rate": 26.76,
+        "count": 6042
+      },
+      "Home Improv.": {
+        "rate": 26.15,
+        "count": 3594
+      },
+      "Personal": {
+        "rate": 19.9,
+        "count": 5498
+      },
+      "Education": {
+        "rate": 17.25,
+        "count": 6411
+      },
+      "Venture": {
+        "rate": 14.85,
+        "count": 5682
+      }
+    },
+    "income_quartile_table": {
+      "Q1 Lowest\n(<=39k)": {
+        "rate": 39.75,
+        "count": 8104
+      },
+      "Q2\n(39-55k)": {
+        "rate": 21.41,
+        "count": 8188
+      },
+      "Q3\n(55-79k)": {
+        "rate": 17.14,
+        "count": 8020
+      },
+      "Q4 Highest\n(>79k)": {
+        "rate": 9.13,
+        "count": 8104
+      }
+    },
+    "loan_amount_table": {
+      "<= 5k": {
+        "rate": 20.47,
+        "count": 9430
+      },
+      "5-10k": {
+        "rate": 18.04,
+        "count": 11983
+      },
+      "10-15k": {
+        "rate": 23.08,
+        "count": 6091
+      },
+      "> 15k": {
+        "rate": 32.39,
+        "count": 4912
+      }
+    },
+    "interest_rate_table": {
+      "< 8%": {
+        "rate": 9.36,
+        "count": 8896
+      },
+      "8-11%": {
+        "rate": 15.47,
+        "count": 7969
+      },
+      "11-14%": {
+        "rate": 19.67,
+        "count": 9567
+      },
+      "> 14%": {
+        "rate": 52.49,
+        "count": 5984
+      }
+    },
+    "age_table": {
+      "20-24": {
+        "rate": 23.34,
+        "count": 12222
+      },
+      "25-29": {
+        "rate": 21.4,
+        "count": 11147
+      },
+      "30-39": {
+        "rate": 20.24,
+        "count": 7291
+      },
+      "40+": {
+        "rate": 21.3,
+        "count": 1756
+      }
+    },
+    "emp_length_table": {
+      "0-1 yrs": {
+        "rate": 27.87,
+        "count": 6983
+      },
+      "2-4 yrs": {
+        "rate": 23.33,
+        "count": 11026
+      },
+      "5-9 yrs": {
+        "rate": 18.34,
+        "count": 10799
+      },
+      "10+ yrs": {
+        "rate": 16.38,
+        "count": 3608
+      }
+    }
+  },
+  "numerical_tests": [
+    {
+      "feature": "loan_percent_income",
+      "overall_mean": 0.1702,
+      "overall_sd": 0.1068,
+      "overall_median": 0.15,
+      "overall_iqr": 0.14,
+      "skewness": 1.0638,
+      "kurtosis": 1.2173,
+      "repaid_mean": 0.1488,
+      "repaid_median": 0.13,
+      "default_mean": 0.2469,
+      "default_median": 0.24,
+      "welch_t_stat": 59.032,
+      "welch_p_value": 0.0,
+      "mann_whitney_u": 129439860.0,
+      "mann_whitney_p_value": 0.0,
+      "rank_biserial_r": 0.4419,
+      "ks_statistic": 0.3519,
+      "ks_p_value": 0.0,
+      "spearman_r": 0.3165,
+      "point_biserial_r": 0.3797,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "loan_int_rate",
+      "overall_mean": 11.0202,
+      "overall_sd": 3.2134,
+      "overall_median": 10.99,
+      "overall_iqr": 5.6,
+      "skewness": 0.21,
+      "kurtosis": -0.6771,
+      "repaid_mean": 10.4521,
+      "repaid_median": 10.65,
+      "default_mean": 13.0497,
+      "default_median": 13.48,
+      "welch_t_stat": 60.2776,
+      "welch_p_value": 0.0,
+      "mann_whitney_u": 129703191.5,
+      "mann_whitney_p_value": 0.0,
+      "rank_biserial_r": 0.4448,
+      "ks_statistic": 0.334,
+      "ks_p_value": 0.0,
+      "spearman_r": 0.3185,
+      "point_biserial_r": 0.3341,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "person_income",
+      "overall_mean": 66091.6408,
+      "overall_sd": 62015.5803,
+      "overall_median": 55000.0,
+      "overall_iqr": 40676.0,
+      "skewness": 32.9572,
+      "kurtosis": 2700.6994,
+      "repaid_mean": 70849.1228,
+      "repaid_median": 60000.0,
+      "default_mean": 49094.498,
+      "default_median": 41682.0,
+      "welch_t_stat": -36.1581,
+      "welch_p_value": 6.044839481280882e-278,
+      "mann_whitney_u": 55642822.5,
+      "mann_whitney_p_value": 0.0,
+      "rank_biserial_r": -0.3802,
+      "ks_statistic": 0.2802,
+      "ks_p_value": 0.0,
+      "spearman_r": -0.2722,
+      "point_biserial_r": -0.145,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "loan_amnt",
+      "overall_mean": 9593.8456,
+      "overall_sd": 6322.7302,
+      "overall_median": 8000.0,
+      "overall_iqr": 7250.0,
+      "skewness": 1.1919,
+      "kurtosis": 1.4208,
+      "repaid_mean": 9240.1558,
+      "repaid_median": 8000.0,
+      "default_mean": 10857.4799,
+      "default_median": 9600.0,
+      "welch_t_stat": 17.4069,
+      "welch_p_value": 6.920492793104042e-67,
+      "mann_whitney_u": 100354119.0,
+      "mann_whitney_p_value": 3.189187391144738e-52,
+      "rank_biserial_r": 0.1179,
+      "ks_statistic": 0.1172,
+      "ks_p_value": 9.788344520046382e-67,
+      "spearman_r": 0.0845,
+      "point_biserial_r": 0.1057,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "person_emp_length",
+      "overall_mean": 4.7615,
+      "overall_sd": 3.9836,
+      "overall_median": 4.0,
+      "overall_iqr": 5.0,
+      "skewness": 1.281,
+      "kurtosis": 2.588,
+      "repaid_mean": 4.9427,
+      "repaid_median": 4.0,
+      "default_mean": 4.1141,
+      "default_median": 3.0,
+      "welch_t_stat": -16.0554,
+      "welch_p_value": 2.092751991393148e-57,
+      "mann_whitney_u": 77766892.5,
+      "mann_whitney_p_value": 3.627511942052166e-67,
+      "rank_biserial_r": -0.1337,
+      "ks_statistic": 0.1047,
+      "ks_p_value": 2.8277094945309758e-53,
+      "spearman_r": -0.0962,
+      "point_biserial_r": -0.086,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "person_age",
+      "overall_mean": 27.7301,
+      "overall_sd": 6.21,
+      "overall_median": 26.0,
+      "overall_iqr": 7.0,
+      "skewness": 1.9425,
+      "kurtosis": 5.8676,
+      "repaid_mean": 27.8017,
+      "repaid_median": 26.0,
+      "default_mean": 27.4744,
+      "default_median": 26.0,
+      "welch_t_stat": -3.8976,
+      "welch_p_value": 9.771256115567446e-05,
+      "mann_whitney_u": 85451813.0,
+      "mann_whitney_p_value": 4.885222276679776e-10,
+      "rank_biserial_r": -0.0481,
+      "ks_statistic": 0.0355,
+      "ks_p_value": 1.6788096621162024e-06,
+      "spearman_r": -0.0346,
+      "point_biserial_r": -0.0218,
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "cb_person_cred_hist_length",
+      "overall_mean": 5.8113,
+      "overall_sd": 4.059,
+      "overall_median": 4.0,
+      "overall_iqr": 5.0,
+      "skewness": 1.6593,
+      "kurtosis": 3.7051,
+      "repaid_mean": 5.8467,
+      "repaid_median": 4.0,
+      "default_mean": 5.6847,
+      "default_median": 4.0,
+      "welch_t_stat": -2.9464,
+      "welch_p_value": 0.0032211907052896623,
+      "mann_whitney_u": 86673103.0,
+      "mann_whitney_p_value": 7.036255460466609e-06,
+      "rank_biserial_r": -0.0345,
+      "ks_statistic": 0.0307,
+      "ks_p_value": 5.875820041946361e-05,
+      "spearman_r": -0.025,
+      "point_biserial_r": -0.0165,
+      "significant_at_0_01": true
+    }
+  ],
+  "categorical_tests": [
+    {
+      "feature": "loan_grade",
+      "num_categories": 7,
+      "chi2_statistic": 5588.3264,
+      "degrees_of_freedom": 6,
+      "p_value": 0.0,
+      "cramers_v": 0.4152,
+      "effect_interpretation": "Strong (>0.30)",
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "person_home_ownership",
+      "num_categories": 4,
+      "chi2_statistic": 1894.3527,
+      "degrees_of_freedom": 3,
+      "p_value": 0.0,
+      "cramers_v": 0.2417,
+      "effect_interpretation": "Moderate (0.15-0.30)",
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "cb_person_default_on_file",
+      "num_categories": 2,
+      "chi2_statistic": 1041.9738,
+      "degrees_of_freedom": 1,
+      "p_value": 1.3516442792486318e-228,
+      "cramers_v": 0.1793,
+      "effect_interpretation": "Moderate (0.15-0.30)",
+      "significant_at_0_01": true
+    },
+    {
+      "feature": "loan_intent",
+      "num_categories": 6,
+      "chi2_statistic": 520.1814,
+      "degrees_of_freedom": 5,
+      "p_value": 3.512381898003748e-110,
+      "cramers_v": 0.1267,
+      "effect_interpretation": "Weak (<0.15)",
+      "significant_at_0_01": true
+    }
+  ],
+  "categorical_level_tables": {
+    "person_home_ownership": [
+      {
+        "category": "OWN",
+        "non_default": 2371,
+        "default": 192,
+        "total": 2563,
+        "share_pct": 7.91,
+        "default_rate_pct": 7.49,
+        "ci_95_low_pct": 6.53,
+        "ci_95_high_pct": 8.58,
+        "odds_ratio_vs_lowest": 1.0
+      },
+      {
+        "category": "MORTGAGE",
+        "non_default": 11682,
+        "default": 1687,
+        "total": 13369,
+        "share_pct": 41.24,
+        "default_rate_pct": 12.62,
+        "ci_95_low_pct": 12.07,
+        "ci_95_high_pct": 13.19,
+        "odds_ratio_vs_lowest": 1.78
+      },
+      {
+        "category": "OTHER",
+        "non_default": 73,
+        "default": 33,
+        "total": 106,
+        "share_pct": 0.33,
+        "default_rate_pct": 31.13,
+        "ci_95_low_pct": 23.11,
+        "ci_95_high_pct": 40.48,
+        "odds_ratio_vs_lowest": 5.62
+      },
+      {
+        "category": "RENT",
+        "non_default": 11201,
+        "default": 5177,
+        "total": 16378,
+        "share_pct": 50.52,
+        "default_rate_pct": 31.61,
+        "ci_95_low_pct": 30.9,
+        "ci_95_high_pct": 32.33,
+        "odds_ratio_vs_lowest": 5.69
+      }
+    ],
+    "loan_intent": [
+      {
+        "category": "VENTURE",
+        "non_default": 4838,
+        "default": 844,
+        "total": 5682,
+        "share_pct": 17.53,
+        "default_rate_pct": 14.85,
+        "ci_95_low_pct": 13.95,
+        "ci_95_high_pct": 15.8,
+        "odds_ratio_vs_lowest": 1.0
+      },
+      {
+        "category": "EDUCATION",
+        "non_default": 5305,
+        "default": 1106,
+        "total": 6411,
+        "share_pct": 19.78,
+        "default_rate_pct": 17.25,
+        "ci_95_low_pct": 16.35,
+        "ci_95_high_pct": 18.2,
+        "odds_ratio_vs_lowest": 1.19
+      },
+      {
+        "category": "PERSONAL",
+        "non_default": 4404,
+        "default": 1094,
+        "total": 5498,
+        "share_pct": 16.96,
+        "default_rate_pct": 19.9,
+        "ci_95_low_pct": 18.86,
+        "ci_95_high_pct": 20.97,
+        "odds_ratio_vs_lowest": 1.42
+      },
+      {
+        "category": "HOMEIMPROVEMENT",
+        "non_default": 2654,
+        "default": 940,
+        "total": 3594,
+        "share_pct": 11.09,
+        "default_rate_pct": 26.15,
+        "ci_95_low_pct": 24.74,
+        "ci_95_high_pct": 27.62,
+        "odds_ratio_vs_lowest": 2.03
+      },
+      {
+        "category": "MEDICAL",
+        "non_default": 4425,
+        "default": 1617,
+        "total": 6042,
+        "share_pct": 18.64,
+        "default_rate_pct": 26.76,
+        "ci_95_low_pct": 25.66,
+        "ci_95_high_pct": 27.89,
+        "odds_ratio_vs_lowest": 2.09
+      },
+      {
+        "category": "DEBTCONSOLIDATION",
+        "non_default": 3701,
+        "default": 1488,
+        "total": 5189,
+        "share_pct": 16.01,
+        "default_rate_pct": 28.68,
+        "ci_95_low_pct": 27.46,
+        "ci_95_high_pct": 29.92,
+        "odds_ratio_vs_lowest": 2.3
+      }
+    ],
+    "loan_grade": [
+      {
+        "category": "A",
+        "non_default": 9637,
+        "default": 1066,
+        "total": 10703,
+        "share_pct": 33.02,
+        "default_rate_pct": 9.96,
+        "ci_95_low_pct": 9.41,
+        "ci_95_high_pct": 10.54,
+        "odds_ratio_vs_lowest": 1.0
+      },
+      {
+        "category": "B",
+        "non_default": 8692,
+        "default": 1695,
+        "total": 10387,
+        "share_pct": 32.04,
+        "default_rate_pct": 16.32,
+        "ci_95_low_pct": 15.62,
+        "ci_95_high_pct": 17.04,
+        "odds_ratio_vs_lowest": 1.76
+      },
+      {
+        "category": "C",
+        "non_default": 5102,
+        "default": 1336,
+        "total": 6438,
+        "share_pct": 19.86,
+        "default_rate_pct": 20.75,
+        "ci_95_low_pct": 19.78,
+        "ci_95_high_pct": 21.76,
+        "odds_ratio_vs_lowest": 2.37
+      },
+      {
+        "category": "D",
+        "non_default": 1482,
+        "default": 2138,
+        "total": 3620,
+        "share_pct": 11.17,
+        "default_rate_pct": 59.06,
+        "ci_95_low_pct": 57.45,
+        "ci_95_high_pct": 60.65,
+        "odds_ratio_vs_lowest": 13.04
+      },
+      {
+        "category": "E",
+        "non_default": 342,
+        "default": 621,
+        "total": 963,
+        "share_pct": 2.97,
+        "default_rate_pct": 64.49,
+        "ci_95_low_pct": 61.41,
+        "ci_95_high_pct": 67.45,
+        "odds_ratio_vs_lowest": 16.4
+      },
+      {
+        "category": "F",
+        "non_default": 71,
+        "default": 170,
+        "total": 241,
+        "share_pct": 0.74,
+        "default_rate_pct": 70.54,
+        "ci_95_low_pct": 64.5,
+        "ci_95_high_pct": 75.94,
+        "odds_ratio_vs_lowest": 21.55
+      },
+      {
+        "category": "G",
+        "non_default": 1,
+        "default": 63,
+        "total": 64,
+        "share_pct": 0.2,
+        "default_rate_pct": 98.44,
+        "ci_95_low_pct": 91.67,
+        "ci_95_high_pct": 99.72,
+        "odds_ratio_vs_lowest": 382.55
+      }
+    ],
+    "cb_person_default_on_file": [
+      {
+        "category": "N",
+        "non_default": 21767,
+        "default": 4919,
+        "total": 26686,
+        "share_pct": 82.32,
+        "default_rate_pct": 18.43,
+        "ci_95_low_pct": 17.97,
+        "ci_95_high_pct": 18.9,
+        "odds_ratio_vs_lowest": 1.0
+      },
+      {
+        "category": "Y",
+        "non_default": 3560,
+        "default": 2170,
+        "total": 5730,
+        "share_pct": 17.68,
+        "default_rate_pct": 37.87,
+        "ci_95_low_pct": 36.62,
+        "ci_95_high_pct": 39.13,
+        "odds_ratio_vs_lowest": 2.7
+      }
+    ]
+  }
+}

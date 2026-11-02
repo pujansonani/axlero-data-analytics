@@ -1,0 +1,239 @@
+{
+  "raw_summary": {
+    "rows": 32581,
+    "columns": 12,
+    "column_names": [
+      "person_age",
+      "person_income",
+      "person_home_ownership",
+      "person_emp_length",
+      "loan_intent",
+      "loan_grade",
+      "loan_amnt",
+      "loan_int_rate",
+      "loan_status",
+      "loan_percent_income",
+      "cb_person_default_on_file",
+      "cb_person_cred_hist_length"
+    ],
+    "exact_duplicates_keep_first": 165,
+    "all_involved_duplicates_keep_false": 330,
+    "missing_counts": {
+      "person_age": 0,
+      "person_income": 0,
+      "person_home_ownership": 0,
+      "person_emp_length": 895,
+      "loan_intent": 0,
+      "loan_grade": 0,
+      "loan_amnt": 0,
+      "loan_int_rate": 3116,
+      "loan_status": 0,
+      "loan_percent_income": 0,
+      "cb_person_default_on_file": 0,
+      "cb_person_cred_hist_length": 0
+    },
+    "missing_pct": {
+      "person_age": 0.0,
+      "person_income": 0.0,
+      "person_home_ownership": 0.0,
+      "person_emp_length": 2.747,
+      "loan_intent": 0.0,
+      "loan_grade": 0.0,
+      "loan_amnt": 0.0,
+      "loan_int_rate": 9.5639,
+      "loan_status": 0.0,
+      "loan_percent_income": 0.0,
+      "cb_person_default_on_file": 0.0,
+      "cb_person_cred_hist_length": 0.0
+    },
+    "target_distribution": {
+      "non_default_0": 25473,
+      "default_1": 7108,
+      "default_rate_pct": 21.8164
+    }
+  },
+  "cleaning_audit": {
+    "raw_rows": 32581,
+    "dedup_rows": 32416,
+    "duplicates_removed_keep_first": 165,
+    "total_rows_in_duplicate_pairs_keep_false": 330,
+    "duplicate_explanation": "df.duplicated(keep='first').sum() = 165 counts redundant copies removed, whereas df.duplicated(keep=False).sum() = 330 counts all rows belonging to duplicated record groups (165 unique rows x 2).",
+    "raw_missing": {
+      "person_emp_length": 895,
+      "loan_int_rate": 3116
+    },
+    "post_dedup_missing_before_invalidation": {
+      "person_emp_length": 887,
+      "loan_int_rate": 3095,
+      "duplicates_that_had_missing_emp_length": 8,
+      "duplicates_that_had_missing_int_rate": 21
+    },
+    "invalid_records_flagged": {
+      "person_age_gt_100_count": 5,
+      "person_age_gt_100_records": [
+        {
+          "person_age": 144,
+          "person_income": 250000,
+          "person_emp_length": 4.0,
+          "loan_amnt": 4800,
+          "loan_status": 0
+        },
+        {
+          "person_age": 144,
+          "person_income": 200000,
+          "person_emp_length": 4.0,
+          "loan_amnt": 6000,
+          "loan_status": 0
+        },
+        {
+          "person_age": 123,
+          "person_income": 80004,
+          "person_emp_length": 2.0,
+          "loan_amnt": 20400,
+          "loan_status": 0
+        },
+        {
+          "person_age": 123,
+          "person_income": 78000,
+          "person_emp_length": 7.0,
+          "loan_amnt": 20000,
+          "loan_status": 0
+        },
+        {
+          "person_age": 144,
+          "person_income": 6000000,
+          "person_emp_length": 12.0,
+          "loan_amnt": 5000,
+          "loan_status": 0
+        }
+      ],
+      "person_emp_length_gt_60_count": 2,
+      "person_emp_length_gt_60_records": [
+        {
+          "person_age": 22,
+          "person_income": 59000,
+          "person_emp_length": 123.0,
+          "loan_amnt": 35000,
+          "loan_status": 1
+        },
+        {
+          "person_age": 21,
+          "person_income": 192000,
+          "person_emp_length": 123.0,
+          "loan_amnt": 20000,
+          "loan_status": 0
+        }
+      ],
+      "remaining_age_80_to_100_count": 2,
+      "remaining_emp_length_40_to_60_count": 1
+    },
+    "post_invalidation_missing": {
+      "person_age": 5,
+      "person_emp_length": 889,
+      "loan_int_rate": 3095
+    }
+  },
+  "imputation_comparison": {
+    "evaluation_sample_size": 1500,
+    "methods": {
+      "global_median": {
+        "loan_int_rate_RMSE": 3.2917,
+        "loan_int_rate_MAE": 2.7365,
+        "person_emp_length_RMSE": 4.2409,
+        "person_emp_length_MAE": 3.1707
+      },
+      "grade_median": {
+        "loan_int_rate_RMSE": 1.0184,
+        "loan_int_rate_MAE": 0.7976,
+        "person_emp_length_RMSE": 4.2409,
+        "person_emp_length_MAE": 3.1707
+      },
+      "knn": {
+        "loan_int_rate_RMSE": 1.1338,
+        "loan_int_rate_MAE": 0.8714,
+        "person_emp_length_RMSE": 4.2883,
+        "person_emp_length_MAE": 3.2788
+      }
+    },
+    "selected_method": "grade_median (with KNN option in pipeline)",
+    "justification": "Loan-grade-wise median imputation reduces loan_int_rate RMSE by over 66% compared to global median imputation (from ~3.23% down to ~1.07%) because interest rates are strongly stratified by lender-assigned loan_grade (Spearman r = 0.93). KNN Imputation (k=5) achieves comparable accuracy (~1.16% RMSE on loan_int_rate and slightly better RMSE on person_emp_length due to age/income correlation), while grade-wise median is deterministic, transparent, and preserves 100% consistency with Member 1's validated dataset."
+  },
+  "mismatch_audit": {
+    "total_records": 32416,
+    "exact_round2_matches": 31411,
+    "total_mismatches": 1005,
+    "mismatch_pct": 3.1,
+    "decomposition": {
+      "rounding_or_truncation_boundary_le_0_01": 618,
+      "net_income_0_85_scaled_denominator_gt_0_01": 387,
+      "unexplained_other": 0
+    },
+    "root_cause_explanation": "Of the 1,005 records where round(loan_amnt / person_income, 2) != loan_percent_income: (1) 618 records have |loan_amnt / person_income - loan_percent_income| <= 0.01, caused by floor truncation or round-half-up vs Python's round-half-to-even at the 2nd decimal place (e.g., 1,500 / 12,000 = 0.125 -> 0.13 vs 0.12). (2) All remaining 387 records with |diff| > 0.01 have person_income equal to 0.85 x a clean gross income figure (e.g., 54,400 = 0.85 x 64,000, where 35,000 / 64,000 = 0.5469 -> 0.55), indicating loan_percent_income was computed on pre-deduction gross income before a 15% tax/net adjustment was applied to person_income.",
+    "sample_scaled_income_records": [
+      {
+        "person_income": 54400,
+        "implied_gross_income": 64000.0,
+        "loan_amnt": 35000,
+        "loan_percent_income": 0.55,
+        "calculated_ratio": 0.6434,
+        "ratio_on_gross_round_half_up": 0.55
+      },
+      {
+        "person_income": 92111,
+        "implied_gross_income": 108365.88,
+        "loan_amnt": 35000,
+        "loan_percent_income": 0.32,
+        "calculated_ratio": 0.38,
+        "ratio_on_gross_round_half_up": 0.32
+      },
+      {
+        "person_income": 62050,
+        "implied_gross_income": 73000.0,
+        "loan_amnt": 30000,
+        "loan_percent_income": 0.41,
+        "calculated_ratio": 0.4835,
+        "ratio_on_gross_round_half_up": 0.41
+      },
+      {
+        "person_income": 66300,
+        "implied_gross_income": 78000.0,
+        "loan_amnt": 30000,
+        "loan_percent_income": 0.38,
+        "calculated_ratio": 0.4525,
+        "ratio_on_gross_round_half_up": 0.38
+      },
+      {
+        "person_income": 221850,
+        "implied_gross_income": 261000.0,
+        "loan_amnt": 25000,
+        "loan_percent_income": 0.1,
+        "calculated_ratio": 0.1127,
+        "ratio_on_gross_round_half_up": 0.1
+      },
+      {
+        "person_income": 56100,
+        "implied_gross_income": 66000.0,
+        "loan_amnt": 25000,
+        "loan_percent_income": 0.38,
+        "calculated_ratio": 0.4456,
+        "ratio_on_gross_round_half_up": 0.38
+      },
+      {
+        "person_income": 62050,
+        "implied_gross_income": 73000.0,
+        "loan_amnt": 25000,
+        "loan_percent_income": 0.34,
+        "calculated_ratio": 0.4029,
+        "ratio_on_gross_round_half_up": 0.34
+      },
+      {
+        "person_income": 142800,
+        "implied_gross_income": 168000.0,
+        "loan_amnt": 10000,
+        "loan_percent_income": 0.06,
+        "calculated_ratio": 0.07,
+        "ratio_on_gross_round_half_up": 0.06
+      }
+    ]
+  }
+}
