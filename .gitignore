@@ -1,0 +1,60 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor and IDE configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Data artifacts (exclude datasets, preserve directory documentation)
+data/raw/*
+!data/raw/README.md
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/README.md
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/README.md
+!data/processed/.gitkeep
+
+# Model artifacts (exclude trained binaries, preserve directory documentation)
+models/*
+!models/README.md
+!models/.gitkeep
+
+# Temporary files and logs
+*.log
+*.tmp
+*.temp
+logs/
+tmp/
