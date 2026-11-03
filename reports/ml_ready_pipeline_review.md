@@ -3,7 +3,7 @@
 **Project:** Finance and Banking – Credit Risk Scoring  
 **Prepared by:** Member 5 – Documentation and Integration
 
- 1. What is an ML Pipeline?
+1. What is an ML Pipeline?
 
 An ML pipeline is a sequence of steps used to prepare data for machine learning.
 
@@ -55,12 +55,6 @@ The notebook compares imputation methods using **MAE** and **RMSE**. These metri
 
 Feature engineering means creating useful features from the existing dataset columns.
 
-For example:
-- A **loan-to-income ratio** compares the loan amount with the applicant's income.
-- Other useful financial features can be created from existing information.
-
-**Purpose:** Prepare meaningful information that can help a machine learning model understand credit risk.
-
  Step 5: Feature Selection + VIF
 
 Not every column in a dataset is equally useful. Feature selection helps identify relevant features for the next stage.
@@ -71,7 +65,7 @@ VIF helps identify multicollinearity. This happens when two or more input featur
 
 **Purpose:** Review important features and identify highly related features.
 
-4. Completed / Reviewed ML Pipeline Flow
+### 4. Completed / Reviewed ML Pipeline Flow
 
 
 Original Loan Dataset
