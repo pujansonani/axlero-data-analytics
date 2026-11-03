@@ -25,7 +25,7 @@ Dataset: `final_validated_dataset.csv` (32,416 loans). Default = `loan_status` o
 
 *Figure 3. Default rate across loan-to-income ratio categories, showing how default frequency changes as the loan amount increases relative to annual income.*
 
-**Observation:** Default rate is 11.8% when the loan is below 10% of income and 70.4% when it is above 30%. The 3,819 loans above 30% (11.8% of all loans) account for 37.9% of all defaults. This is one of the strongest patterns in the data.
+**Observation:** Default rate is 11.8% when the loan is 10% or less of income and 70.4% when it is above 30%. The 3,819 loans above 30% (11.8% of all loans) account for 37.9% of all defaults. This is one of the strongest patterns in the data.
 
 ### Prior default and home ownership
 ![Figure 4. Default rate by prior default record (left) and home ownership (right).](figures/fig04_prior_default_and_home_ownership.png)
@@ -53,7 +53,7 @@ Dataset: `final_validated_dataset.csv` (32,416 loans). Default = `loan_status` o
 
 *Figure 7. Default rates across loan amount categories (left) and interest rate categories (right), highlighting the relationship between borrowing characteristics and loan default.*
 
-**Observation:** Loans above 15k default at 32.4% versus 18.0% for 5k-10k, but the pattern is not smooth (20.5% for loans up to 5k). Interest rate shows a clearer pattern: 9.4% below 8% and 52.5% above 14%. Median interest rate is 13.48% for defaulted loans versus 10.65% for repaid loans. Like grade, the interest rate is set by the lender after assessing risk.
+**Observation:** Loans above 15k default at 32.4% versus 18.0% for 5k-10k, but the pattern is not smooth (20.5% for loans up to 5k). Interest rate shows a clearer pattern: 9.4% at 8% or less and 52.5% above 14%. Median interest rate is 13.48% for defaulted loans versus 10.65% for repaid loans. Like grade, the interest rate is set by the lender after assessing risk.
 
 ### Age and employment length
 ![Figure 8. Default rate by age group (left) and years in current job (right).](figures/fig08_age_and_employment.png)

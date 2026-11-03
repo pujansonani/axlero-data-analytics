@@ -22,11 +22,31 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # ----------------------------- settings -----------------------------
-DATA_PATH = os.environ.get("DATA_PATH", "final_validated_dataset.csv")   # <- change to your dataset path
 try:
     HERE = os.path.dirname(os.path.abspath(__file__))
 except NameError:         # notebooks have no __file__
     HERE = os.getcwd()
+
+# DATA_PATH can be supplied explicitly. Otherwise, look beside this script first,
+# then in the current working directory (useful when launched from the repo root).
+_env_data_path = os.environ.get("DATA_PATH")
+if _env_data_path:
+    DATA_PATH = os.path.abspath(_env_data_path)
+else:
+    _data_candidates = [
+        os.path.join(HERE, "final_validated_dataset.csv"),
+        os.path.join(os.getcwd(), "final_validated_dataset.csv"),
+        os.path.join(os.getcwd(), "member2_analysis_visualization", "final_validated_dataset.csv"),
+    ]
+    DATA_PATH = next((p for p in _data_candidates if os.path.isfile(p)), _data_candidates[0])
+
+if not os.path.isfile(DATA_PATH):
+    raise FileNotFoundError(
+        "Could not find final_validated_dataset.csv. Put it beside make_figures.py "
+        "or set the DATA_PATH environment variable to its full path. Checked: "
+        + "; ".join(_data_candidates if not _env_data_path else [DATA_PATH])
+    )
+
 OUT_DIR = os.path.join(HERE, "figures")
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -46,6 +66,17 @@ plt.rcParams.update({
 })
 
 df = pd.read_csv(DATA_PATH)
+REQUIRED_COLUMNS = [
+    "loan_status", "loan_grade", "loan_percent_income", "cb_person_default_on_file",
+    "person_home_ownership", "loan_intent", "person_income", "loan_amnt",
+    "loan_int_rate", "person_age", "person_emp_length", "cb_person_cred_hist_length",
+]
+missing_columns = [col for col in REQUIRED_COLUMNS if col not in df.columns]
+if missing_columns:
+    raise ValueError("Dataset is missing required columns: " + ", ".join(missing_columns))
+if df["loan_status"].isna().any() or not set(df["loan_status"].unique()).issubset({0, 1}):
+    raise ValueError("loan_status must contain only 0 (repaid) and 1 (default), with no missing values.")
+
 df["is_default"] = df["loan_status"].astype(int)       # 1 = default, 0 = repaid
 OVERALL = df["is_default"].mean() * 100
 print("Rows:", len(df), "| overall default rate: %.1f%%" % OVERALL)
@@ -111,7 +142,7 @@ save(fig, "fig02_default_rate_by_grade.png")
 
 # ---------------- Figure 3: loan burden (loan as % of income) ----------------
 df["burden_band"] = pd.cut(df["loan_percent_income"], [-0.001, 0.10, 0.20, 0.30, 1.0],
-                           labels=["≤10%", ">10-20%", ">20-30%", ">30%"])
+                           labels=["≤ 10%", "10-20%", "20-30%", "> 30%"])
 t_burden = rate_table("burden_band")
 fig, ax = plt.subplots(figsize=(7.5, 4.2))
 rate_bars(ax, t_burden, "Loans that are large compared with income default far more often",
@@ -166,7 +197,7 @@ save(fig, "fig06_income.png")
 # ---------------- Figure 7: loan amount + interest rate ----------------
 df["amt_band"] = pd.cut(df["loan_amnt"], [0, 5000, 10000, 15000, 35000],
                         labels=["≤ 5k", "5-10k", "10-15k", "> 15k"])
-df["rate_band"] = pd.cut(df["loan_int_rate"], [0, 8, 11, 14, 30], labels=["< 8%", "8-11%", "11-14%", ">14%"])
+df["rate_band"] = pd.cut(df["loan_int_rate"], [0, 8, 11, 14, 30], labels=["≤ 8%", "8-11%", "11-14%", "> 14%"])
 t_amt = rate_table("amt_band")
 t_rate = rate_table("rate_band")
 fig, ax = plt.subplots(1, 2, figsize=(11, 4.2))
