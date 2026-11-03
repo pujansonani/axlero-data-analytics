@@ -1,0 +1,2 @@
+# Only needed to rebuild the architecture PDF (docs/build_architecture_pdf.py)
+reportlab==4.2.5
