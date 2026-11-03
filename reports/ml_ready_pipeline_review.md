@@ -70,16 +70,16 @@ VIF helps identify multicollinearity. This happens when two or more input featur
 
 Original Loan Dataset
         |
-        v
+        
 Data Cleaning
         |
-        v
+        
 Missing Value Handling
         |
-        v
+        
 Feature Engineering
         |
-        v
+        
 Feature Selection + VIF
 
 
