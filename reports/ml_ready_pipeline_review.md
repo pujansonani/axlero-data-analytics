@@ -3,7 +3,7 @@
 **Project:** Finance and Banking – Credit Risk Scoring  
 **Prepared by:** Member 5 – Documentation and Integration
 
-1.What is an ML Pipeline?
+# 1.What is an ML Pipeline?
 
 An ML pipeline is a sequence of steps used to prepare data for machine learning.
 
@@ -11,7 +11,7 @@ In simple words, it explains how we take the original data, clean it, and prepar
 
 This document focuses only on the five stages that have been completed or reviewed in the team's notebooks.
 
-2. Completed / Reviewed Pipeline
+# 2. Completed / Reviewed Pipeline
 
 1. Original Loan Dataset
 2. Data Cleaning
