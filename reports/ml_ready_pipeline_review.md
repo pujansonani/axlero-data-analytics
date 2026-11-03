@@ -3,7 +3,7 @@
 **Project:** Finance and Banking – Credit Risk Scoring  
 **Prepared by:** Member 5 – Documentation and Integration
 
-1. What is an ML Pipeline?
+1.What is an ML Pipeline?
 
 An ML pipeline is a sequence of steps used to prepare data for machine learning.
 
@@ -105,14 +105,4 @@ The reviewed notebook includes:
 
 These notebook reviews support the five stages listed in the completed/reviewed pipeline above.
 
-## 6. Member 5 – My Contribution
-
-As Member 5, my responsibilities include:
-
-1. Reviewing the team's data preprocessing and feature engineering work.
-2. Understanding and explaining the ML pipeline.
-3. Preparing simple and clear project documentation.
-4. Organizing the README and project report.
-5. Helping present project results in a dashboard when the required results are available.
-6. Coordinating documentation and deliverables with team members.
 
