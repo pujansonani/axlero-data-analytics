@@ -111,7 +111,7 @@ save(fig, "fig02_default_rate_by_grade.png")
 
 # ---------------- Figure 3: loan burden (loan as % of income) ----------------
 df["burden_band"] = pd.cut(df["loan_percent_income"], [-0.001, 0.10, 0.20, 0.30, 1.0],
-                           labels=["< 10%", "10-20%", "20-30%", "> 30%"])
+                           labels=["≤10%", ">10-20%", ">20-30%", ">30%"])
 t_burden = rate_table("burden_band")
 fig, ax = plt.subplots(figsize=(7.5, 4.2))
 rate_bars(ax, t_burden, "Loans that are large compared with income default far more often",
@@ -165,8 +165,8 @@ save(fig, "fig06_income.png")
 
 # ---------------- Figure 7: loan amount + interest rate ----------------
 df["amt_band"] = pd.cut(df["loan_amnt"], [0, 5000, 10000, 15000, 35000],
-                        labels=["<= 5k", "5-10k", "10-15k", "> 15k"])
-df["rate_band"] = pd.cut(df["loan_int_rate"], [0, 8, 11, 14, 30], labels=["< 8%", "8-11%", "11-14%", "> 14%"])
+                        labels=["≤ 5k", "5-10k", "10-15k", "> 15k"])
+df["rate_band"] = pd.cut(df["loan_int_rate"], [0, 8, 11, 14, 30], labels=["< 8%", "8-11%", "11-14%", ">14%"])
 t_amt = rate_table("amt_band")
 t_rate = rate_table("rate_band")
 fig, ax = plt.subplots(1, 2, figsize=(11, 4.2))
