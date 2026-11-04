@@ -1,0 +1,8 @@
+Column,Lower_Limit,Upper_Limit,Outlier_Count
+person_age,12.5,40.5,1486
+person_income,-22472.0,140232.0,1478
+person_emp_length,-5.5,14.5,850
+loan_amnt,-5875.0,23125.0,1679
+loan_int_rate,-0.52,21.88,6
+loan_percent_income,-0.12,0.44,650
+cb_person_cred_hist_length,-4.5,15.5,1139
