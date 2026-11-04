@@ -1,7 +1,7 @@
 # Explainable AI (XAI) Using SHAP – Simple Explanation
 
 **Project:** Finance and Banking – Credit Risk Scoring and Prediction  
-**Prepared by:** Member 5 – Documentation and Integration
+**Prepared by:** Member 5 – Explainable AI and Dashboard Enhancement
 
 ## 1. What is Explainable AI (XAI)?
 
