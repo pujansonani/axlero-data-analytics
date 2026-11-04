@@ -1,0 +1,46 @@
+Check,Column,Count,Status
+Required Column,person_age,0,PASS
+Required Column,person_income,0,PASS
+Required Column,person_home_ownership,0,PASS
+Required Column,person_emp_length,0,PASS
+Required Column,loan_intent,0,PASS
+Required Column,loan_grade,0,PASS
+Required Column,loan_amnt,0,PASS
+Required Column,loan_int_rate,0,PASS
+Required Column,loan_status,0,PASS
+Required Column,loan_percent_income,0,PASS
+Required Column,cb_person_default_on_file,0,PASS
+Required Column,cb_person_cred_hist_length,0,PASS
+Missing Values,person_age,0,PASS
+Missing Values,person_income,0,PASS
+Missing Values,person_home_ownership,0,PASS
+Missing Values,person_emp_length,0,PASS
+Missing Values,loan_intent,0,PASS
+Missing Values,loan_grade,0,PASS
+Missing Values,loan_amnt,0,PASS
+Missing Values,loan_int_rate,0,PASS
+Missing Values,loan_status,0,PASS
+Missing Values,loan_percent_income,0,PASS
+Missing Values,cb_person_default_on_file,0,PASS
+Missing Values,cb_person_cred_hist_length,0,PASS
+Duplicate Records,All Columns,0,PASS
+Invalid Records,person_age,0,PASS
+Invalid Records,person_income,0,PASS
+Invalid Records,person_emp_length,0,PASS
+Invalid Records,loan_amnt,0,PASS
+Invalid Records,loan_int_rate,0,PASS
+Invalid Records,loan_percent_income,0,PASS
+Invalid Records,cb_person_cred_hist_length,0,PASS
+Target Column Verification,loan_status,0,PASS
+Data Types,person_age,float64,PASS
+Data Types,person_income,int64,PASS
+Data Types,person_home_ownership,str,PASS
+Data Types,person_emp_length,float64,PASS
+Data Types,loan_intent,str,PASS
+Data Types,loan_grade,str,PASS
+Data Types,loan_amnt,int64,PASS
+Data Types,loan_int_rate,float64,PASS
+Data Types,loan_status,int64,PASS
+Data Types,loan_percent_income,float64,PASS
+Data Types,cb_person_default_on_file,str,PASS
+Data Types,cb_person_cred_hist_length,int64,PASS
