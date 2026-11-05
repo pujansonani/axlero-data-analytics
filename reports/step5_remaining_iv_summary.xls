@@ -1,0 +1,10 @@
+feature,IV
+loan_int_rate,0.6649597168285258
+person_income,0.44719238050122423
+person_home_ownership,0.3831268652844206
+cb_person_default_on_file,0.16507246099864215
+loan_intent,0.09249809042737758
+loan_amnt,0.07734253631332337
+person_emp_length,0.048854273360392164
+person_age,0.007374070838592916
+cb_person_cred_hist_length,0.004386337273973229
