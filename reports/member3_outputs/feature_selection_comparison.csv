@@ -1,0 +1,12 @@
+Feature,Previous_IV,VIF,Numerical_Adjusted_P,Categorical_Adjusted_P,Reduced_Model_Decision
+loan_grade,0.87,,,0.0,Retain candidate
+loan_percent_income,0.7064,2.0191546577477983,0.0,,Retain candidate
+loan_int_rate,0.665,1.026455609082443,0.0,,Retain candidate
+person_income,0.4472,1.4443246110099115,3.696045188186541e-213,,Retain candidate
+person_home_ownership,0.3831,,,0.0,Retain candidate
+cb_person_default_on_file,0.1651,,,4.884386296735035e-184,Exclude candidate
+loan_intent,0.0925,,,1.284379174780142e-84,Retain candidate
+loan_amnt,0.0773,2.0584432714785525,4.696817960454609e-56,,Retain candidate
+person_emp_length,0.0489,1.064507679879353,2.4354085102572834e-46,,Retain candidate
+person_age,0.0074,4.377520259589348,0.0035177001578777,,Exclude candidate
+cb_person_cred_hist_length,0.0044,4.349289824442743,0.0196656948759855,,Exclude candidate

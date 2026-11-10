@@ -1,0 +1,9 @@
+Feature,Selection_Status
+person_income,Selected
+person_emp_length,Selected
+loan_amnt,Selected
+loan_int_rate,Selected
+loan_percent_income,Selected
+person_home_ownership,Selected
+loan_intent,Selected
+loan_grade,Selected
